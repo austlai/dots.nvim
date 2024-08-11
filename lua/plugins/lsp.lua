@@ -59,6 +59,12 @@ return {
                 end,
             })
 
+            local function area(x, y)
+                return x * y
+            end
+
+            area(1, 2)
+
             local lspconfig = require("lspconfig")
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
@@ -68,15 +74,27 @@ return {
                         capabilities = capabilities,
                     })
                 end,
-                ["basedpyright"] = function ()
-                    -- Disable diagnostics, potentially setup mypy?
-                    lspconfig.pyright.setup({
+                ["basedpyright"] = function()
+                    -- TODO: Disable diagnostics, potentially setup mypy?, set typeCheckingMode to `strict` and pythonVersion to `3.7`
+                    lspconfig.basedpyright.setup({
                         capabilities = capabilities,
-                        handlers = {
-                            ["textDocument/publishDiagnostics"] = function() end
-                        }
+                        -- handlers = {
+                        --     ["textDocument/publishDiagnostics"] = function() end
+                        -- }
                     })
                 end,
+                ["lua_ls"] = function()
+                    lspconfig.lua_ls.setup({
+                        capabilities = capabilities,
+                        settings = {
+                            Lua = {
+                                hint = {
+                                    enable = true
+                                }
+                            }
+                        }
+                    })
+                end
             })
         end
     }
