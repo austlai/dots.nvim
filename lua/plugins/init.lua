@@ -1,23 +1,14 @@
 -- Plugins --
 
 return {
-    -- Themes & Colours
+    "nvim-lua/plenary.nvim",
     {
         "rebelot/kanagawa.nvim",
         config = function()
             require("kanagawa").load("wave")
         end
     },
-    'HiPhish/nvim-ts-rainbow2',
-    'kyazdani42/nvim-web-devicons',
-
-    ---- QOL
-    {
-        "windwp/nvim-autopairs",
-        config = function()
-            require("nvim-autopairs").setup()
-        end
-    },
+    'christoomey/vim-tmux-navigator',
     {
         'folke/todo-comments.nvim',
         event = "VimEnter",
@@ -25,11 +16,17 @@ return {
             require('todo-comments').setup()
         end
     },
-    'christoomey/vim-tmux-navigator',
+
+    -- TODO: replacements?
+    'HiPhish/nvim-ts-rainbow2',
+    'kyazdani42/nvim-web-devicons',
+    {
+        "windwp/nvim-autopairs",
+        config = function()
+            require("nvim-autopairs").setup()
+        end
+    },
 
     ---- LSP
-    'hrsh7th/cmp-cmdline',
-    'onsails/lspkind-nvim',
-    'L3MON4D3/LuaSnip',
 }
 
