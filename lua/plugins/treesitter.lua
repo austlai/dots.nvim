@@ -8,7 +8,21 @@ return {
     end,
     config = function()
         require'nvim-treesitter.configs'.setup({
-            ensure_installed = { "c", "cpp", "vim", "lua", "vimdoc", "query", "python", "php", "phpdoc", "typescript", "html", "css", "scss" },
+            ensure_installed = {
+                "c",
+                "cpp",
+                "vim",
+                "lua",
+                "vimdoc",
+                "query",
+                "python",
+                "php",
+                "phpdoc",
+                "typescript",
+                "html",
+                "css",
+                "scss"
+            },
             highlight = {
                 enable = true,
             },
