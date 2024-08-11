@@ -3,7 +3,7 @@
 return {
     'nvim-lualine/lualine.nvim',
     config = function()
-        local diagnostics = guifg=#202020{
+        local diagnostics = {
           "diagnostics",
           colored = false,
         }

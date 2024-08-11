@@ -10,11 +10,6 @@ return {
     },
     'HiPhish/nvim-ts-rainbow2',
     'kyazdani42/nvim-web-devicons',
-    ---- File Searching
-    {
-        'nvim-telescope/telescope-fzf-native.nvim',
-        build = 'make'
-    },
 
     ---- QOL
     {
@@ -30,16 +25,11 @@ return {
             require('todo-comments').setup()
         end
     },
-    'wakatime/vim-wakatime',
     'christoomey/vim-tmux-navigator',
 
     ---- LSP
-    'neovim/nvim-lspconfig',
     'hrsh7th/cmp-cmdline',
     'onsails/lspkind-nvim',
-    'williamboman/mason.nvim',
-    'williamboman/mason-lspconfig.nvim',
     'L3MON4D3/LuaSnip',
-
 }
 

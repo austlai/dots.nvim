@@ -7,13 +7,14 @@ return {
         ts_update()
     end,
     config = function()
-        require'nvim-treesitter.configs'.setup {
+        require'nvim-treesitter.configs'.setup({
+            ensure_installed = { "c", "cpp", "vim", "lua", "vimdoc", "query", "python", "php", "phpdoc", "typescript", "html", "css", "scss" },
             highlight = {
                 enable = true,
             },
             indent = {
                 enable = true,
             },
-        }
+        })
     end
 }
