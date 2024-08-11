@@ -55,7 +55,8 @@ return {
                     --     vim.lsp.handlers.signature_help, {border = "rounded"}
                     -- )
 
-                    vim.lsp.inlay_hint.enable(true)
+                    -- Disabling inlay hints for now... very annoying
+                    -- vim.lsp.inlay_hint.enable(true)
                 end,
             })
 
@@ -83,18 +84,19 @@ return {
                         -- }
                     })
                 end,
-                ["lua_ls"] = function()
-                    lspconfig.lua_ls.setup({
-                        capabilities = capabilities,
-                        settings = {
-                            Lua = {
-                                hint = {
-                                    enable = true
-                                }
-                            }
-                        }
-                    })
-                end
+                -- Disabling inlay hints for now... very annoying
+                -- ["lua_ls"] = function()
+                --     lspconfig.lua_ls.setup({
+                --         capabilities = capabilities,
+                --         settings = {
+                --             Lua = {
+                --                 hint = {
+                --                     enable = true
+                --                 }
+                --             }
+                --         }
+                --     })
+                -- end
             })
         end
     }
