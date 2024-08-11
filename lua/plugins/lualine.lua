@@ -1,12 +1,10 @@
--- lualine --
-
 return {
     'nvim-lualine/lualine.nvim',
     config = function()
         require('lualine').setup {
             options = {
                 icons_enabled = true,
-                theme = 'auto',
+                theme = 'kanagawa',
                 component_separators = "",
                 section_separators = "",
                 disabled_filetypes = {},

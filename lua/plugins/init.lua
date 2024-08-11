@@ -1,32 +1,16 @@
--- Plugins --
-
 return {
-    "nvim-lua/plenary.nvim",
     {
         "rebelot/kanagawa.nvim",
+        priority = 1000,
         config = function()
             require("kanagawa").load("wave")
         end
     },
+    "nvim-lua/plenary.nvim",
     'christoomey/vim-tmux-navigator',
+    'HiPhish/rainbow-delimiters.nvim',
     {
         'folke/todo-comments.nvim',
-        event = "VimEnter",
-        config = function()
-            require('todo-comments').setup()
-        end
+        opts = {}
     },
-
-    -- TODO: replacements?
-    'HiPhish/nvim-ts-rainbow2',
-    'kyazdani42/nvim-web-devicons',
-    {
-        "windwp/nvim-autopairs",
-        config = function()
-            require("nvim-autopairs").setup()
-        end
-    },
-
-    ---- LSP
 }
-

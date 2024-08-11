@@ -1,23 +1,21 @@
 -- Options --
 
-local opt = vim.opt
-local fn = vim.fn
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+vim.opt.smartindent = true
+vim.opt.cursorline = true
+vim.opt.showmatch = true
+vim.opt.colorcolumn = '80'
+vim.opt.clipboard = 'unnamedplus'
+vim.opt.mouse = 'a'
+vim.opt.number = true
+vim.opt.completeopt = { "menu", "menuone", "noselect" }
+vim.opt.termguicolors = true
 
-opt.tabstop = 4
-opt.softtabstop = 4
-opt.shiftwidth = 4
-opt.expandtab = true
-opt.smartindent = true
-opt.cursorline = true
-opt.showmatch = true
-opt.colorcolumn = '80'
-opt.clipboard = 'unnamedplus'
-opt.mouse = 'a'
-opt.number = true
-opt.completeopt = { "menu", "menuone", "noselect" }
 vim.g.mapleader = ' '
 
-if fn.has('nvim') or fn.has('termguicolors')
-then
-    opt.termguicolors = true
-end
+-- disable netrw for NvimTree
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1

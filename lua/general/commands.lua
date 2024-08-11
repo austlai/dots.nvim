@@ -2,6 +2,7 @@
 
 local api = vim.api
 
+-- toggle relative line numbers
 local numberToggleGroup = api.nvim_create_augroup("numberToggle", {clear = true})
 api.nvim_create_autocmd(
     {"BufEnter", "FocusGained", "InsertLeave", "WinEnter"},
@@ -21,23 +22,13 @@ api.nvim_create_autocmd(
 )
 
 -- Remove trailing whitespace
-function trimWhitespace()
+TrimWhitespace = function()
     local current_view = vim.fn.winsaveview()
     vim.cmd([[keeppatterns %s/\s\+$//e]])
     vim.fn.winrestview(current_view)
 end
 
-vim.cmd([[
-highlight ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+$/
-autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-autocmd BufWinLeave * call clearmatches()
-]])
-
 vim.api.nvim_create_autocmd("BufWritePre", {
-    command = [[lua trimWhitespace()]],
+    command = [[lua TrimWhitespace()]],
     desc = "Remove trailing whitespace on write",
 })

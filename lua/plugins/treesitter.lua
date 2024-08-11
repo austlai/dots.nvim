@@ -1,5 +1,3 @@
--- Treesitter --
-
 return {
     'nvim-treesitter/nvim-treesitter',
     build = function()
@@ -11,17 +9,18 @@ return {
             ensure_installed = {
                 "c",
                 "cpp",
-                "vim",
+                "css",
+                "html",
                 "lua",
-                "vimdoc",
-                "query",
-                "python",
+                "markdown",
                 "php",
                 "phpdoc",
+                "python",
+                "query",
+                "scss",
                 "typescript",
-                "html",
-                "css",
-                "scss"
+                "vim",
+                "vimdoc",
             },
             highlight = {
                 enable = true,
