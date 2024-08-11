@@ -1,7 +1,7 @@
 return {
     "karb94/neoscroll.nvim",
     config = function()
-        local neoscroll = require('neoscroll')
+        local neoscroll = require("neoscroll")
         neoscroll.setup({ mappings = {} }) -- clear all mappings
 
         local keymap = {
@@ -12,7 +12,7 @@ return {
             ["zb"]    = function() neoscroll.zb({ half_win_duration = 50 }) end;
         }
 
-        local modes = { 'n', 'v', 'x' }
+        local modes = { "n", "v", "x" }
         for key, func in pairs(keymap) do
             vim.keymap.set(modes, key, func)
         end

@@ -68,12 +68,12 @@ return {
                         capabilities = capabilities,
                     })
                 end,
-                ['basedpyright'] = function ()
+                ["basedpyright"] = function ()
                     -- Disable diagnostics, potentially setup mypy?
                     lspconfig.pyright.setup({
                         capabilities = capabilities,
                         handlers = {
-                            ['textDocument/publishDiagnostics'] = function() end
+                            ["textDocument/publishDiagnostics"] = function() end
                         }
                     })
                 end,

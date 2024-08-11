@@ -1,11 +1,11 @@
 return {
-    'nvim-treesitter/nvim-treesitter',
+    "nvim-treesitter/nvim-treesitter",
     build = function()
-        local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+        local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
         ts_update()
     end,
     config = function()
-        require'nvim-treesitter.configs'.setup({
+        require"nvim-treesitter.configs".setup({
             ensure_installed = {
                 "c",
                 "cpp",

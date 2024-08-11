@@ -1,5 +1,5 @@
 return {
-    'lukas-reineke/indent-blankline.nvim',
+    "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
     config = function()
         vim.cmd("hi! IblScope guifg=#938056")

@@ -11,8 +11,8 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require('general.options')
-require('general.mappings')
-require('general.commands')
+require("general.options")
+require("general.mappings")
+require("general.commands")
 
 require("lazy").setup("plugins")

@@ -7,10 +7,10 @@ return {
         end
     },
     "nvim-lua/plenary.nvim",
-    'christoomey/vim-tmux-navigator',
-    'HiPhish/rainbow-delimiters.nvim',
+    "christoomey/vim-tmux-navigator",
+    "HiPhish/rainbow-delimiters.nvim",
     {
-        'folke/todo-comments.nvim',
+        "folke/todo-comments.nvim",
         opts = {}
     },
 }

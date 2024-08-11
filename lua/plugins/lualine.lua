@@ -1,10 +1,10 @@
 return {
-    'nvim-lualine/lualine.nvim',
+    "nvim-lualine/lualine.nvim",
     config = function()
-        require('lualine').setup {
+        require("lualine").setup {
             options = {
                 icons_enabled = true,
-                theme = 'kanagawa',
+                theme = "kanagawa",
                 component_separators = "",
                 section_separators = "",
                 disabled_filetypes = {},
@@ -13,12 +13,12 @@ return {
                 padding = 2,
             },
             sections = {
-                lualine_a = {'mode'},
-                lualine_b = {'branch', 'diff'},
-                lualine_c = {'diagnostics'},
-                lualine_x = {'filename'},
-                lualine_y = {'progress'},
-                lualine_z = {'location'}
+                lualine_a = {"mode"},
+                lualine_b = {"branch", "diff"},
+                lualine_c = {"diagnostics"},
+                lualine_x = {"filename"},
+                lualine_y = {"progress"},
+                lualine_z = {"location"}
             },
             extensions = {}
         }
