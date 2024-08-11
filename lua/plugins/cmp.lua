@@ -17,6 +17,7 @@ return {
         "zbirenbaum/copilot-cmp",
     },
     config = function()
+        require("luasnip").filetype_extend("typescript", {"angular"})
         require("luasnip.loaders.from_vscode").lazy_load()
         require("copilot_cmp").setup()
 

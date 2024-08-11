@@ -14,7 +14,8 @@ return {
                     "cssls",
                     "lua_ls",
                     "basedpyright",
-                    "phpactor"
+                    "phpactor",
+                    "eslint"
                 },
             })
 
@@ -83,6 +84,15 @@ return {
                         --     ["textDocument/publishDiagnostics"] = function() end
                         -- }
                     })
+                end,
+                ["eslint"] = function()
+                  lspconfig.eslint.setup({
+                    capabilities = capabilities,
+                    -- NOTE: FREELANCER ROOT_DIR
+                    root_dir = function()
+                        return vim.fn.getcwd()
+                    end,
+                  })
                 end,
                 -- Disabling inlay hints for now... very annoying
                 -- ["lua_ls"] = function()
