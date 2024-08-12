@@ -9,7 +9,7 @@ return {
             require("mason").setup()
             require("mason-lspconfig").setup({
                 ensure_installed = {
-                    "tsserver",
+                    -- "tsserver",
                     "html",
                     "cssls",
                     "lua_ls",
@@ -50,22 +50,16 @@ return {
 
                     -- #borderssuck
                     -- vim.lsp.handlers["textDocument/hover"] =  vim.lsp.with(
-                    --     vim.lsp.handlers.hover, {border = "rounded" }
+                    --     vim.lsp.handlers.hover, {border = "single" }
                     -- )
                     -- vim.lsp.handlers["textDocument/signatureHelp"] =  vim.lsp.with(
-                    --     vim.lsp.handlers.signature_help, {border = "rounded"}
+                    --     vim.lsp.handlers.signature_help, {border = "single"}
                     -- )
 
                     -- Disabling inlay hints for now... very annoying
                     -- vim.lsp.inlay_hint.enable(true)
                 end,
             })
-
-            local function area(x, y)
-                return x * y
-            end
-
-            area(1, 2)
 
             local lspconfig = require("lspconfig")
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -77,7 +71,7 @@ return {
                     })
                 end,
                 ["basedpyright"] = function()
-                    -- TODO: Disable diagnostics, potentially setup mypy?, set typeCheckingMode to `strict` and pythonVersion to `3.7`
+                    -- TODO: Disable diagnostics, potentially setup mypy?
                     lspconfig.basedpyright.setup({
                         capabilities = capabilities,
                         -- handlers = {
@@ -94,19 +88,6 @@ return {
                     end,
                   })
                 end,
-                -- Disabling inlay hints for now... very annoying
-                -- ["lua_ls"] = function()
-                --     lspconfig.lua_ls.setup({
-                --         capabilities = capabilities,
-                --         settings = {
-                --             Lua = {
-                --                 hint = {
-                --                     enable = true
-                --                 }
-                --             }
-                --         }
-                --     })
-                -- end
             })
         end
     }
