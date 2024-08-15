@@ -9,14 +9,12 @@ return {
             require("mason").setup()
             require("mason-lspconfig").setup({
                 ensure_installed = {
-                    -- "tsserver",
                     "html",
                     "cssls",
                     "lua_ls",
                     "basedpyright",
                     "phpactor",
                     "eslint",
-                    -- "angularls"
                 },
             })
 
@@ -49,16 +47,14 @@ return {
                     vim.keymap.set("n", "<leader>a", vim.lsp.buf.code_action, opts)
                     vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 
-                    -- #borderssuck
-                    -- vim.lsp.handlers["textDocument/hover"] =  vim.lsp.with(
-                    --     vim.lsp.handlers.hover, {border = "single" }
-                    -- )
-                    -- vim.lsp.handlers["textDocument/signatureHelp"] =  vim.lsp.with(
-                    --     vim.lsp.handlers.signature_help, {border = "single"}
-                    -- )
-
-                    -- Disabling inlay hints for now... very annoying
-                    -- vim.lsp.inlay_hint.enable(true)
+                    vim.lsp.handlers["textDocument/hover"] =  vim.lsp.with(
+                        vim.lsp.handlers.hover, {
+                            border = "single",
+                        }
+                    )
+                    vim.lsp.handlers["textDocument/signatureHelp"] =  vim.lsp.with(
+                        vim.lsp.handlers.signature_help, {border = "single"}
+                    )
                 end,
             })
 
@@ -72,12 +68,8 @@ return {
                     })
                 end,
                 ["basedpyright"] = function()
-                    -- TODO: Disable diagnostics, potentially setup mypy?
                     lspconfig.basedpyright.setup({
                         capabilities = capabilities,
-                        -- handlers = {
-                        --     ["textDocument/publishDiagnostics"] = function() end
-                        -- }
                     })
                 end,
                 ["eslint"] = function()

@@ -6,7 +6,7 @@ return {
             hint_enable = false,
             doc_lines = 0,
             handler_opts = {
-                border = "none"
+                border = "single"
             }
         })
     end

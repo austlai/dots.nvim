@@ -22,15 +22,6 @@ return {
         require("luasnip.loaders.from_vscode").lazy_load()
         require("copilot_cmp").setup()
 
-        -- local has_words_before = function()
-        --     if vim.api.nvim_get_option_value("buftype", {buf=0}) == "prompt" then
-        --         return false
-        --     end
-        --     unpack = unpack or table.unpack
-        --     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-        --     return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-        -- end
-
         local cmp = require("cmp")
         cmp.setup({
             preselect = cmp.PreselectMode.None,
@@ -43,8 +34,8 @@ return {
                 end,
             },
             mapping = {
-                ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-                ["<C-u>"] = cmp.mapping.scroll_docs(4),
+                ["<C-d>"] = cmp.mapping.scroll_docs(4),
+                ["<C-u>"] = cmp.mapping.scroll_docs(-4),
                 ["<C-e>"] = cmp.mapping.close(),
                 ["<C-space>"] = cmp.mapping.complete(),
                 ["<CR>"] = cmp.mapping(function(fallback)
@@ -92,9 +83,8 @@ return {
                 { name = "spell", keyword_length = 3 },
             },
             window = {
-                -- #borderssuck
-                -- completion = cmp.config.window.bordered(),
-                -- documentation = cmp.config.window.bordered(),
+                completion = cmp.config.window.bordered({ border = "single" }),
+                documentation = cmp.config.window.bordered({ border = "single" }),
             },
             formatting = {
                 format = require("lspkind").cmp_format({
@@ -111,7 +101,7 @@ return {
                 }),
             },
             experimental = {
-                ghost_text = true
+                ghost_text = false
             },
         })
 
