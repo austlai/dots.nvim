@@ -17,18 +17,19 @@ return {
         "zbirenbaum/copilot-cmp",
     },
     config = function()
-        require("luasnip").filetype_extend("typescript", {"angular"})
+        local luasnip = require("luasnip")
+        luasnip.filetype_extend("typescript", {"angular"})
         require("luasnip.loaders.from_vscode").lazy_load()
         require("copilot_cmp").setup()
 
-        local has_words_before = function()
-            if vim.api.nvim_get_option_value("buftype", {buf=0}) == "prompt" then
-                return false
-            end
-            unpack = unpack or table.unpack
-            local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-            return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-        end
+        -- local has_words_before = function()
+        --     if vim.api.nvim_get_option_value("buftype", {buf=0}) == "prompt" then
+        --         return false
+        --     end
+        --     unpack = unpack or table.unpack
+        --     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+        --     return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+        -- end
 
         local cmp = require("cmp")
         cmp.setup({
@@ -38,7 +39,7 @@ return {
             },
             snippet = {
                 expand = function(args)
-                    require("luasnip").lsp_expand(args.body)
+                    luasnip.lsp_expand(args.body)
                 end,
             },
             mapping = {
@@ -68,30 +69,24 @@ return {
                     end
                 end,
                 ["<Tab>"] = cmp.mapping(function(fallback)
-                    if vim.snippet.active({ direction = 1 }) then
-                        vim.schedule(function()
-                            vim.snippet.jump(1)
-                        end)
-                    elseif cmp.visible() and has_words_before() then
-                        cmp.complete()
+                    if luasnip.locally_jumpable(1) then
+                        luasnip.jump(1)
                     else
                         fallback()
                     end
                 end, { "i", "s" }),
                 ["<S-Tab>"] = cmp.mapping(function(fallback)
-                    if vim.snippet.active({ direction = -1 }) then
-                        vim.schedule(function()
-                            vim.snippet.jump(-1)
-                        end)
+                    if luasnip.locally_jumpable(-1) then
+                        luasnip.jump(-1)
                     else
                         fallback()
                     end
                 end, { "i", "s" }),
             },
             sources = {
-                { name = "nvim_lsp" },
-                { name = "copilot" },
-                { name = "luasnip" },
+                { name = "nvim_lsp", priority = 100 },
+                { name = "luasnip", priority = 90 },
+                { name = "copilot", priority = 80 },
                 { name = "buffer" },
                 { name = "path" },
                 { name = "spell", keyword_length = 3 },

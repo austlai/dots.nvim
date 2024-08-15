@@ -15,7 +15,8 @@ return {
                     "lua_ls",
                     "basedpyright",
                     "phpactor",
-                    "eslint"
+                    "eslint",
+                    -- "angularls"
                 },
             })
 
