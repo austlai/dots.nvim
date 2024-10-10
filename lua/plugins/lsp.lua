@@ -13,7 +13,7 @@ return {
                     "cssls",
                     "lua_ls",
                     "basedpyright",
-                    "phpactor",
+                    "phpactor@2023.09.24.0",
                     "eslint",
                 },
             })
