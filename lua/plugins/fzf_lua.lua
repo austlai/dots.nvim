@@ -9,12 +9,15 @@ return {
                 border = "single"
             },
             fzf_opts = {
-                ["--layout"] = "default"
+                ["--layout"] = "default",
             },
             keymap = {
                 fzf = {
                     ["ctrl-q"] = "select-all+accept"
                 }
+            },
+            grep = {
+                rg_opts = "--column --line-number --no-heading --color=always --smart-case --max-columns=4096 --multiline -e",
             }
         })
 

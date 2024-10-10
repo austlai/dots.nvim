@@ -40,3 +40,25 @@ api.nvim_create_autocmd("TextYankPost", {
     end
 })
 
+-- TODO: Fix this
+-- 1. Make it actually run on new line
+-- 2. Capture the initial indentation and apply it for the new lines
+ConvertComment = function()
+    local line = vim.api.nvim_get_current_line()
+    local comment = line:match('^%s*//%s*(.*)')
+    if comment then
+        local new_lines = { '/**', ' * ' .. comment, ' */' }
+        local row = vim.api.nvim_win_get_cursor(0)[1]
+        vim.api.nvim_buf_set_lines(0, row - 1, row, false, new_lines)
+    else
+        -- If not a comment, simply execute a normal Enter
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<CR>", true, false, true), 'n', false)
+    end
+end
+
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = { 'typescript', 'php' },
+    callback = function()
+        vim.api.nvim_buf_set_keymap(0, 'n', '<CR>', ':lua ConvertComment()<CR>', { noremap = true, silent = true })
+    end,
+})

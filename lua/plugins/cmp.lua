@@ -18,7 +18,13 @@ return {
     },
     config = function()
         local luasnip = require("luasnip")
-        luasnip.filetype_extend("typescript", {"angular"})
+        luasnip.filetype_extend("typescript", {
+            "angular",
+            "tsdoc"
+        })
+        luasnip.filetype_extend("php", {
+            "phpdoc"
+        })
         require("luasnip.loaders.from_vscode").lazy_load()
         require("copilot_cmp").setup()
 
@@ -90,14 +96,14 @@ return {
                 format = require("lspkind").cmp_format({
                     maxwidth = 50,
                     with_text = true,
-                    menu = {
-                        nvim_lsp = "[LSP]",
-                        path = "[Path]",
-                        buffer = "[Buffer]",
-                        spell = "[Spell]",
-                        luasnip = "[Snip]",
-                        copilot = "[Copilot]",
-                    },
+                    -- menu = {
+                    --     nvim_lsp = "[LSP]",
+                    --     path = "[Path]",
+                    --     buffer = "[Buffer]",
+                    --     spell = "[Spell]",
+                    --     luasnip = "[Snip]",
+                    --     copilot = "[Copilot]",
+                    -- },
                 }),
             },
             experimental = {
