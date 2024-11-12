@@ -77,7 +77,7 @@ return {
                     capabilities = capabilities,
                     -- NOTE: FREELANCER ROOT_DIR
                     root_dir = function()
-                        return vim.fn.getcwd()
+                        return '/home/alai/freelancer-dev/fl-gaf/webapp'
                     end,
                   })
                 end,
