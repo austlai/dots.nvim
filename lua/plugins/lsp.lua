@@ -15,6 +15,7 @@ return {
                     "basedpyright",
                     "phpactor@2023.09.24.0",
                     "eslint",
+                    "marksman",
                 },
             })
 
@@ -48,12 +49,12 @@ return {
                     vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 
                     vim.lsp.handlers["textDocument/hover"] =  vim.lsp.with(
-                        vim.lsp.handlers.hover, {
-                            border = "single",
-                        }
+                    vim.lsp.handlers.hover, {
+                        border = "single",
+                    }
                     )
                     vim.lsp.handlers["textDocument/signatureHelp"] =  vim.lsp.with(
-                        vim.lsp.handlers.signature_help, {border = "single"}
+                    vim.lsp.handlers.signature_help, {border = "single"}
                     )
                 end,
             })
@@ -73,14 +74,32 @@ return {
                     })
                 end,
                 ["eslint"] = function()
-                  lspconfig.eslint.setup({
-                    capabilities = capabilities,
-                    -- NOTE: FREELANCER ROOT_DIR
-                    root_dir = function()
-                        return '/home/alai/freelancer-dev/fl-gaf/webapp'
-                    end,
-                  })
+                    lspconfig.eslint.setup({
+                        capabilities = capabilities,
+                        -- NOTE: FREELANCER ROOT_DIR
+                        root_dir = function()
+                            return '/home/alai/freelancer-dev/fl-gaf/webapp'
+                        end,
+                    })
                 end,
+                ['phpactor'] = function()
+                    lspconfig.phpactor.setup({
+                        capabilities = capabilities,
+                        init_options = {
+                            ["logging.enabled"] = true,
+                            ["logging.level"] = 'debug',
+                            ["logging.path"] = 'phpactor.log',
+                            ["language_server_phpstan.enabled"] = true,
+                            ["language_server_psalm.enabled"] = true,
+                            ["language_server_psalm.threads"] = 16,
+                            ["php_code_sniffer.enabled"] = false,
+                            -- ["php_code_sniffer.args"] = {'--standard=/home/alai/freelancer-dev/fl-gaf/phpcs_gaf.xml'},
+                            ["prophecy.enabled"] = false,
+                            ["language_server.diagnostic_outsource"] = false,
+                            ["language_server.diagnostics_on_update"] = false,
+                        }
+                    })
+                end
             })
         end
     }

@@ -13,6 +13,7 @@ return {
                 "html",
                 "lua",
                 "markdown",
+                "markdown_inline",
                 "php",
                 "phpdoc",
                 "python",
@@ -28,6 +29,16 @@ return {
             indent = {
                 enable = false,
             },
+        })
+
+        -- Enable indenting only for PHP files
+        vim.api.nvim_create_autocmd("FileType", {
+            pattern = "php",
+            callback = function()
+                require("nvim-treesitter.configs").setup({
+                    indent = { enable = true }
+                })
+            end,
         })
     end
 }
