@@ -86,11 +86,11 @@ return {
                     lspconfig.phpactor.setup({
                         capabilities = capabilities,
                         init_options = {
-                            ["logging.enabled"] = true,
+                            ["logging.enabled"] = false,
                             ["logging.level"] = 'debug',
                             ["logging.path"] = 'phpactor.log',
-                            ["language_server_phpstan.enabled"] = true,
-                            ["language_server_psalm.enabled"] = true,
+                            ["language_server_phpstan.enabled"] = false,
+                            ["language_server_psalm.enabled"] = true, --
                             ["language_server_psalm.threads"] = 16,
                             ["php_code_sniffer.enabled"] = false,
                             -- ["php_code_sniffer.args"] = {'--standard=/home/alai/freelancer-dev/fl-gaf/phpcs_gaf.xml'},
