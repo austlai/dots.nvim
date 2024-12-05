@@ -16,6 +16,7 @@ return {
                     "phpactor@2023.09.24.0",
                     "eslint",
                     "marksman",
+                    "intelephense"
                 },
             })
 
@@ -85,6 +86,17 @@ return {
                 ['phpactor'] = function()
                     lspconfig.phpactor.setup({
                         capabilities = capabilities,
+                        on_attach = function(client)
+                          client.server_capabilities.hoverProvider = false
+                          client.server_capabilities.documentSymbolProvider = false
+                          client.server_capabilities.referencesProvider = false
+                          client.server_capabilities.completionProvider = false
+                          client.server_capabilities.documentFormattingProvider = false
+                          client.server_capabilities.definitionProvider = false
+                          client.server_capabilities.implementationProvider = true
+                          client.server_capabilities.typeDefinitionProvider = false
+                          client.server_capabilities.diagnosticProvider = false
+                        end,
                         init_options = {
                             ["logging.enabled"] = false,
                             ["logging.level"] = 'debug',
@@ -98,6 +110,21 @@ return {
                             ["language_server.diagnostic_outsource"] = false,
                             ["language_server.diagnostics_on_update"] = false,
                         }
+                    })
+                end,
+                ['intelephense'] = function()
+                    lspconfig.intelephense.setup({
+                        capabilities = capabilities,
+                        on_attach = function(client)
+                          client.server_capabilities.workspaceSymbolProvider = false
+                        end,
+                        settings = {
+                          php = {
+                            completion = {
+                              callSnippet = "Replace"
+                            }
+                          }
+                        },
                     })
                 end
             })
