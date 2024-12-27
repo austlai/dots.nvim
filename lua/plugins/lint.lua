@@ -4,7 +4,7 @@ return {
   config = function()
     local lint = require("lint")
 
-    -- NOTE: Not working, setup with phpactor lsp instead...
+    -- NOTE: Not working (even without configuration), setup with phpactor lsp instead...
     -- lint.linters.psalm = {
     --   cmd = "./vendor/bin/psalm",
     --   args = {
@@ -27,13 +27,26 @@ return {
       },
     }
 
+    lint.linters.phpstan = {
+      cmd = "./vendor/bin/phpstan",
+      args = {
+        'analyse',
+        '--no-progress',
+        '--error-format=json',
+        '--memory-limit=-1',
+        '--no-ansi',
+        '--no-interaction',
+        '--configuration=/home/alai/freelancer-dev/fl-gaf/phpstan.neon',
+      },
+    }
+
     lint.linters_by_ft = {
-      php = { "phpcs" },
+      php = { "phpcs", "phpstan" },
     }
 
     local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
 
-    vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost" }, {
+    vim.api.nvim_create_autocmd({ "BufWritePost" }, {
       group = lint_augroup,
       callback = function()
         lint.try_lint()

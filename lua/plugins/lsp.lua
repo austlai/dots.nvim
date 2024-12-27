@@ -16,7 +16,8 @@ return {
                     "phpactor@2023.09.24.0",
                     "eslint",
                     "marksman",
-                    "intelephense"
+                    "intelephense",
+                    "angularls"
                 },
             })
 
@@ -61,7 +62,7 @@ return {
             })
 
             local lspconfig = require("lspconfig")
-            local capabilities = require("cmp_nvim_lsp").default_capabilities()
+            local capabilities = require('blink.cmp').get_lsp_capabilities()
 
             require("mason-lspconfig").setup_handlers({
                 function(server)
