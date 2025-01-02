@@ -12,13 +12,13 @@ return {
     },
     {
         "CopilotC-Nvim/CopilotChat.nvim",
-        branch = "canary",
+        branch = "main",
         dependencies = {
             { "zbirenbaum/copilot.lua" },
             { "nvim-lua/plenary.nvim" },
         },
         keys = {
-            { "<leader>cp", ":CopilotChatToggle<CR>" },
+            { "<leader>cc", ":CopilotChatToggle<CR>" },
         },
         opts = {},
     }

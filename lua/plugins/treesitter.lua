@@ -45,5 +45,23 @@ return {
         end,
       })
     end
+  },
+  {
+    'aaronik/treewalker.nvim',
+    -- The setup function is optional, defaults are meant to be sane
+    -- and setup does not need to be called
+    setup = function()
+      require('treewalker').setup({
+        -- Whether to briefly highlight the node after jumping to it
+        highlight = true,
+
+        -- How long should above highlight last (in ms)
+        highlight_duration = 250,
+
+        -- The color of the above highlight. Must be a valid vim highlight group.
+        -- (see :h highlight-group for options)
+        highlight_group = 'ColorColumn',
+      })
+    end
   }
 }

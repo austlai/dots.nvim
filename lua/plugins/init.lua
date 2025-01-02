@@ -4,11 +4,20 @@ return {
         lazy = false,
         priority = 1000,
         config = function()
-            require("kanagawa").load("wave")
+            -- require("kanagawa").load("wave")
             -- Make floating window background match normal background
             vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })
             vim.api.nvim_set_hl(0, "FloatBorder", { link = "Normal" })
         end
+    },
+    {
+      "rose-pine/neovim",
+      lazy = false,
+      priority = 1000,
+      name = "rose-pine",
+      config = function()
+        vim.cmd("colorscheme rose-pine")
+      end
     },
     "nvim-lua/plenary.nvim",
     "christoomey/vim-tmux-navigator",

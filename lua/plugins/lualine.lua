@@ -4,7 +4,7 @@ return {
         require("lualine").setup {
             options = {
                 icons_enabled = true,
-                theme = "kanagawa",
+                theme = "rose-pine",
                 component_separators = "",
                 section_separators = "",
                 disabled_filetypes = {},
