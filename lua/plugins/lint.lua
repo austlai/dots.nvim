@@ -4,40 +4,39 @@ return {
   config = function()
     local lint = require("lint")
 
+    --TODO: Update the params for these based on `fl-gaf/.arclint` (:
+
     -- NOTE: Not working (even without configuration), setup with phpactor lsp instead...
-    -- lint.linters.psalm = {
-    --   cmd = "./vendor/bin/psalm",
-    --   args = {
-    --     "--output-format=json",
-    --     "--show-info=true",
-    --     "--no-progress",
-    --     "--threads=16",
-    --     "--config=/home/alai/freelancer-dev/fl-gaf/psalm.xml",
-    --     "--use-baseline=/home/alai/freelancer-dev/fl-gaf/psalm-baseline.xml"
-    --   },
+    -- local psalm = lint.linters.psalm
+    -- psalm.cmd = "./vendor/bin/psalm"
+    -- psalm.args = {
+    --   "--output-format=json",
+    --   "--show-info=true",
+    --   "--no-progress",
+    --   "--threads=16",
+    --   "--config=/home/alai/freelancer-dev/fl-gaf/psalm.xml",
+    --   "--use-baseline=/home/alai/freelancer-dev/fl-gaf/psalm-baseline.xml"
     -- }
 
-    lint.linters.phpcs = {
-      cmd = "./vendor/bin/phpcs",
-      args = {
-        "-q",
-        "--report=json",
-        "--standard=/home/alai/freelancer-dev/fl-gaf/phpcs_gaf.xml",
-        "-", -- need `-` at the end for stdin support
-      },
+    local phpcs = lint.linters.phpcs
+    phpcs.cmd = "./vendor/bin/phpcs"
+    phpcs.args = {
+      "-q",
+      "--report=json",
+      "--standard=/home/alai/freelancer-dev/fl-gaf/phpcs_gaf.xml",
+      "-", -- need `-` at the end for stdin support
     }
 
-    lint.linters.phpstan = {
-      cmd = "./vendor/bin/phpstan",
-      args = {
-        'analyse',
-        '--no-progress',
-        '--error-format=json',
-        '--memory-limit=-1',
-        '--no-ansi',
-        '--no-interaction',
-        '--configuration=/home/alai/freelancer-dev/fl-gaf/phpstan.neon',
-      },
+    local phpstan = lint.linters.phpstan
+    phpstan.cmd = "./vendor/bin/phpstan"
+    phpstan.args = {
+      'analyse',
+      '--no-progress',
+      '--error-format=json',
+      '--memory-limit=-1',
+      '--no-ansi',
+      '--no-interaction',
+      '--configuration=/home/alai/freelancer-dev/fl-gaf/phpstan.neon',
     }
 
     lint.linters_by_ft = {

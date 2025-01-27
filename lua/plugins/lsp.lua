@@ -17,7 +17,8 @@ return {
                     "eslint",
                     "marksman",
                     "intelephense",
-                    "angularls"
+                    "thriftls",
+                    -- "angularls",
                 },
             })
 
@@ -40,8 +41,8 @@ return {
                 group = vim.api.nvim_create_augroup("UserLspConfig", {}),
                 callback = function(ev)
                     local opts = { noremap = true, buffer = ev.buf, silent = true }
-                    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-                    vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+                    -- vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+                    -- vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
                     vim.keymap.set("n", "ge", vim.diagnostic.open_float, opts)
                     vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
                     vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
@@ -70,6 +71,33 @@ return {
                         capabilities = capabilities,
                     })
                 end,
+                -- ["angularls"] = function()
+                --   -- Setup taken from https://github.com/gmr458/nvim/blob/321f118faf5ed0c84550e52a9978523e794ef688/lua/gmr/configs/lsp/settings/angularls.lua
+                --   local angularls_path = require("mason-registry").get_package('angular-language-server'):get_install_path()
+                --   local cmd = {
+                --     'ngserver',
+                --     '--stdio',
+                --     '--tsProbeLocations',
+                --     table.concat({
+                --       angularls_path,
+                --       vim.uv.cwd(),
+                --     }, ','),
+                --     '--ngProbeLocations',
+                --     table.concat({
+                --       angularls_path .. '/node_modules/@angular/language-server',
+                --       vim.uv.cwd(),
+                --     }, ','),
+                --   }
+
+                --   lspconfig.angularls.setup({
+                --     capabilities = capabilities,
+                --     cmd = cmd,
+                --     on_attach = function(client)
+                --       client.server_capabilities.diagnosticProvider = false
+                --       client.server_capabilities.hoverProvider = false
+                --     end,
+                --   })
+                -- end,
                 ["basedpyright"] = function()
                     lspconfig.basedpyright.setup({
                         capabilities = capabilities,
@@ -79,8 +107,14 @@ return {
                     lspconfig.eslint.setup({
                         capabilities = capabilities,
                         -- NOTE: FREELANCER ROOT_DIR
-                        root_dir = function()
+                        root_dir = function(fname)
+                          -- Check if 'api-e2e' exists in the path
+                          if string.match(fname, "api%-e2e") then
+                            return '/home/alai/freelancer-dev/fl-gaf/api-e2e'
+                          else
+                            -- Fallback to the webapp directory
                             return '/home/alai/freelancer-dev/fl-gaf/webapp'
+                          end
                         end,
                     })
                 end,
@@ -103,8 +137,9 @@ return {
                             ["logging.level"] = 'debug',
                             ["logging.path"] = 'phpactor.log',
                             ["language_server_phpstan.enabled"] = false,
-                            ["language_server_psalm.enabled"] = true, --
+                            ["language_server_psalm.enabled"] = true,
                             ["language_server_psalm.threads"] = 16,
+                            ["language_server_psalm.timeout"] = 60,
                             ["php_code_sniffer.enabled"] = false,
                             -- ["php_code_sniffer.args"] = {'--standard=/home/alai/freelancer-dev/fl-gaf/phpcs_gaf.xml'},
                             ["prophecy.enabled"] = false,

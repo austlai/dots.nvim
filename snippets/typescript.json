@@ -1,0 +1,9 @@
+{
+  "tap": {
+    "prefix": "taplog",
+    "body": [
+      "pipe(tap(x => console.log(x)))$0"
+    ],
+    "scope": "typescript"
+  }
+}

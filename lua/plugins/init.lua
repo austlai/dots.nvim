@@ -16,9 +16,22 @@ return {
       priority = 1000,
       name = "rose-pine",
       config = function()
+        require("rose-pine").setup({
+          dim_inactive_windows = true,
+          -- styles = {
+          --   italic = false
+          -- },
+          highlight_groups = {
+            CurSearch = { fg = "base", bg = "leaf", inherit = false },
+            Search = { fg = "text", bg = "leaf", blend = 20, inherit = false },
+          },
+        })
         vim.cmd("colorscheme rose-pine")
       end
     },
+    { "projekt0n/github-nvim-theme", name = "github-theme" },
+    { "savq/melange-nvim" },
+    { "ramojus/mellifluous.nvim" },
     "nvim-lua/plenary.nvim",
     "christoomey/vim-tmux-navigator",
     "HiPhish/rainbow-delimiters.nvim",

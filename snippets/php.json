@@ -1,0 +1,9 @@
+{
+  "dlog": {
+    "prefix": "log",
+    "body": [
+      "Logger::debug(json_encode([\n\t'$1' => $2\n]));$0"
+    ],
+    "scope": "php"
+  }
+}

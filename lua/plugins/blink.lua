@@ -27,16 +27,7 @@ return {
           border = 'single',
         },
       },
-      snippets = {
-        expand = function(snippet) require('luasnip').lsp_expand(snippet) end,
-        active = function(filter)
-          if filter and filter.direction then
-            return require('luasnip').jumpable(filter.direction)
-          end
-          return require('luasnip').in_snippet()
-        end,
-        jump = function(direction) require('luasnip').jump(direction) end,
-      },
+      snippets = { preset = 'luasnip' },
       sources = {
         providers = {
           copilot = {
@@ -45,15 +36,18 @@ return {
             score_offset = 100,
             async = true,
           },
+          snippets = {
+            score_offset = 101 -- Prefer snippets over copilot
+          }
         },
-        default = { "lsp", "path", "snippets", "luasnip", "buffer", "copilot" },
+        default = { "lsp", "path", "snippets", "buffer", "copilot" },
       },
       appearance = {
         use_nvim_cmp_as_default = true,
         nerd_font_variant = 'mono',
       },
     },
-    opts_extend = { "sources.default" },
+    -- opts_extend = { "sources.default" },
     config = function(_, opts)
       local luasnip = require("luasnip")
       luasnip.filetype_extend("typescript", {
@@ -64,6 +58,7 @@ return {
         "phpdoc"
       })
       require("luasnip.loaders.from_vscode").lazy_load()
+      require("luasnip.loaders.from_vscode").lazy_load({ paths = { vim.fn.stdpath("config") .. "/snippets" } })
       require('blink.cmp').setup(opts)
     end
   }

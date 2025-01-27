@@ -23,12 +23,12 @@ return {
         }
       }
 
-      vim.keymap.set('n', '<F5>', function() require('dap').continue() end)
+      vim.keymap.set('n', '<F5>', function() dap.continue() end)
       vim.keymap.set('n', '<F6>', function() require('dapui').toggle() end)
-      vim.keymap.set('n', '<leader>db', function() require('dap').toggle_breakpoint() end)
-      vim.keymap.set('n', '<leader>do', function() require('dap').step_over() end)
-      vim.keymap.set('n', '<leader>di', function() require('dap').step_into() end)
-      vim.keymap.set('n', '<leader>du', function() require('dap').step_out() end)
+      vim.keymap.set('n', '<leader>db', function() dap.toggle_breakpoint() end)
+      vim.keymap.set('n', '<leader>do', function() dap.step_over() end)
+      vim.keymap.set('n', '<leader>di', function() dap.step_into() end)
+      vim.keymap.set('n', '<leader>du', function() dap.step_out() end)
     end,
   },
   {
