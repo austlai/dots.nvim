@@ -18,7 +18,7 @@ return {
                     "marksman",
                     "intelephense",
                     "thriftls",
-                    -- "angularls",
+                    -- "angularls@17.3.2",
                 },
             })
 
@@ -35,6 +35,17 @@ return {
             "hrsh7th/cmp-nvim-lsp",
             { "antosha417/nvim-lsp-file-operations", config = true },
             "williamboman/mason.nvim",
+            {
+              "SmiteshP/nvim-navbuddy",
+              dependencies = {
+                "SmiteshP/nvim-navic",
+                "MunifTanjim/nui.nvim"
+              },
+              opts = {},
+              config = function()
+                vim.keymap.set("n", "<Leader>n", ":Navbuddy<CR>", { silent = true, desc = "Open Navbuddy" })
+              end
+            }
         },
         config = function()
             vim.api.nvim_create_autocmd("LspAttach", {
@@ -44,26 +55,27 @@ return {
                     -- vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
                     -- vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
                     vim.keymap.set("n", "ge", vim.diagnostic.open_float, opts)
-                    vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
-                    vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
+                    vim.keymap.set("n", "[d", function() vim.diagnostic.jump({count = 1, float = true}) end, opts)
+                    vim.keymap.set("n", "]d", function() vim.diagnostic.jump({count = -1, float = true}) end, opts)
                     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
                     vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
                     vim.keymap.set("n", "<leader>a", vim.lsp.buf.code_action, opts)
                     vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 
-                    vim.lsp.handlers["textDocument/hover"] =  vim.lsp.with(
-                    vim.lsp.handlers.hover, {
-                        border = "single",
-                    }
-                    )
-                    vim.lsp.handlers["textDocument/signatureHelp"] =  vim.lsp.with(
-                    vim.lsp.handlers.signature_help, {border = "single"}
-                    )
+                    -- vim.lsp.handlers["textDocument/hover"] =  vim.lsp.with(
+                    -- vim.lsp.handlers.hover, {
+                    --     border = "single",
+                    -- }
+                    -- )
+                    -- vim.lsp.handlers["textDocument/signatureHelp"] =  vim.lsp.with(
+                    -- vim.lsp.handlers.signature_help, {border = "single"}
+                    -- )
                 end,
             })
 
             local lspconfig = require("lspconfig")
             local capabilities = require('blink.cmp').get_lsp_capabilities()
+            local navbuddy = require("nvim-navbuddy")
 
             require("mason-lspconfig").setup_handlers({
                 function(server)
@@ -72,7 +84,6 @@ return {
                     })
                 end,
                 -- ["angularls"] = function()
-                --   -- Setup taken from https://github.com/gmr458/nvim/blob/321f118faf5ed0c84550e52a9978523e794ef688/lua/gmr/configs/lsp/settings/angularls.lua
                 --   local angularls_path = require("mason-registry").get_package('angular-language-server'):get_install_path()
                 --   local cmd = {
                 --     'ngserver',
@@ -87,21 +98,36 @@ return {
                 --       angularls_path .. '/node_modules/@angular/language-server',
                 --       vim.uv.cwd(),
                 --     }, ','),
+                --     '--experimental-ivy'
                 --   }
 
                 --   lspconfig.angularls.setup({
                 --     capabilities = capabilities,
                 --     cmd = cmd,
-                --     on_attach = function(client)
-                --       client.server_capabilities.diagnosticProvider = false
-                --       client.server_capabilities.hoverProvider = false
+                --   })
+                -- end,
+                -- ["vtsls"] = function()
+                --   lspconfig.vtsls.setup({
+                --     capabilities = capabilities,
+                --     on_attach = function(client, bufnr)
+                --       navbuddy.attach(client, bufnr)
                 --     end,
+                --     settings = {
+                --       typescript = {
+                --         preferences = {
+                --           importModuleSpecifier = "non-relative",
+                --         },
+                --       },
+                --     }
                 --   })
                 -- end,
                 ["basedpyright"] = function()
-                    lspconfig.basedpyright.setup({
-                        capabilities = capabilities,
-                    })
+                  lspconfig.basedpyright.setup({
+                    capabilities = capabilities,
+                    on_attach = function(client, bufnr)
+                      navbuddy.attach(client, bufnr)
+                    end,
+                  })
                 end,
                 ["eslint"] = function()
                     lspconfig.eslint.setup({
@@ -116,6 +142,10 @@ return {
                             return '/home/alai/freelancer-dev/fl-gaf/webapp'
                           end
                         end,
+                        flags = {
+                          allow_incremental_sync = false,
+                          debounce_text_changes = 1000
+                        }
                     })
                 end,
                 ['phpactor'] = function()
@@ -151,7 +181,8 @@ return {
                 ['intelephense'] = function()
                     lspconfig.intelephense.setup({
                         capabilities = capabilities,
-                        on_attach = function(client)
+                        on_attach = function(client, bufnr)
+                          navbuddy.attach(client, bufnr)
                           client.server_capabilities.workspaceSymbolProvider = false
                         end,
                         settings = {
@@ -165,5 +196,8 @@ return {
                 end
             })
         end
+    },
+    {
+
     }
 }

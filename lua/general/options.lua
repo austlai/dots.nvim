@@ -14,6 +14,9 @@ vim.opt.mouse = "a"
 vim.opt.number = true
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 vim.opt.termguicolors = true
+vim.opt.inccommand = 'split'
+
+vim.o.winborder = 'single'
 
 vim.g.mapleader = " "
 

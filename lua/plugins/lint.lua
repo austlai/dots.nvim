@@ -4,7 +4,7 @@ return {
   config = function()
     local lint = require("lint")
 
-    --TODO: Update the params for these based on `fl-gaf/.arclint` (:
+    --TODO: Update the params for these based on `.arclint` (:
 
     -- NOTE: Not working (even without configuration), setup with phpactor lsp instead...
     -- local psalm = lint.linters.psalm

@@ -3,21 +3,28 @@ return {
     'saghen/blink.cmp',
     dependencies = {
       'rafamadriz/friendly-snippets',
-      'giuxtaposition/blink-cmp-copilot',
+      'fang2hou/blink-copilot',
       { 'L3MON4D3/LuaSnip', version = 'v2.*' },
     },
     version = '*',
+    lazy = true,
+    event = 'InsertEnter',
     opts = {
       keymap = { preset = 'default' },
       completion = {
         menu = {
           enabled = true,
           border = 'single',
+          winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:BlinkCmpMenuSelection,Search:None",
+          draw = {
+            treesitter = { 'lsp' },
+          }
         },
         documentation = {
           auto_show = true,
           window = {
             border = 'single',
+            winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:BlinkCmpDocCursorLine,Search:None",
           },
         },
       },
@@ -25,20 +32,22 @@ return {
         enabled = true,
         window = {
           border = 'single',
+          winhighlight = 'Normal:Normal,FloatBorder:FloatBorder',
         },
       },
       snippets = { preset = 'luasnip' },
       sources = {
         providers = {
+          lsp = {
+            score_offset = 80,
+            async = true
+          },
           copilot = {
             name = "copilot",
-            module = "blink-cmp-copilot",
+            module = "blink-copilot",
             score_offset = 100,
             async = true,
           },
-          snippets = {
-            score_offset = 101 -- Prefer snippets over copilot
-          }
         },
         default = { "lsp", "path", "snippets", "buffer", "copilot" },
       },

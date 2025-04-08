@@ -37,7 +37,7 @@ return {
 
       -- Enable indenting only for PHP files
       vim.api.nvim_create_autocmd("FileType", {
-        pattern = "php",
+        pattern = { "php", "typescript" },
         callback = function()
           require("nvim-treesitter.configs").setup({
             indent = { enable = true }

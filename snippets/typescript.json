@@ -5,5 +5,22 @@
       "pipe(tap(x => console.log(x)))$0"
     ],
     "scope": "typescript"
+  },
+  "newcomponent": {
+    "prefix": "newcomponent",
+    "body": [
+      "import { ChangeDetectionStrategy, Component } from '@angular/core';",
+      "",
+      "@Component({",
+      "  selector: '$1',",
+      "  template: `$2`,",
+      "  changeDetection: ChangeDetectionStrategy.OnPush,",
+      "  styleUrls: ['$3'],",
+      "})",
+      "export class $4Component {",
+      "  $0",
+      "}"
+    ],
+    "scope": "typescript"
   }
 }

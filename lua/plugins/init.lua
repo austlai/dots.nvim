@@ -6,8 +6,8 @@ return {
         config = function()
             -- require("kanagawa").load("wave")
             -- Make floating window background match normal background
-            vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })
-            vim.api.nvim_set_hl(0, "FloatBorder", { link = "Normal" })
+            -- vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })
+            -- vim.api.nvim_set_hl(0, "FloatBorder", { link = "Normal" })
         end
     },
     {
@@ -26,12 +26,61 @@ return {
             Search = { fg = "text", bg = "leaf", blend = 20, inherit = false },
           },
         })
-        vim.cmd("colorscheme rose-pine")
+        -- vim.cmd.colorscheme("rose-pine")
       end
     },
-    { "projekt0n/github-nvim-theme", name = "github-theme" },
-    { "savq/melange-nvim" },
+    {
+      "wtfox/jellybeans.nvim",
+      priority = 1000,
+      config = function()
+        require("jellybeans").setup()
+        -- vim.cmd.colorscheme("jellybeans")
+
+        -- vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })
+        -- vim.api.nvim_set_hl(0, "FloatBorder", { link = "Normal" })
+        -- vim.api.nvim_set_hl(0, "Pmenu", { link = "Normal" })
+      end,
+    },
+    {
+      "projekt0n/github-nvim-theme",
+      name = "github-theme",
+      config = function()
+        -- vim.cmd.colorscheme("github_light_high_contrast")
+      end,
+    },
     { "ramojus/mellifluous.nvim" },
+    {
+      'sainnhe/edge',
+      lazy = false,
+      priority = 1000,
+      config = function()
+        -- Optionally configure and load the colorscheme
+        -- directly inside the plugin declaration.
+        vim.g.edge_enable_italic = true
+        -- vim.cmd.colorscheme('edge')
+      end
+    },
+    {
+      "miikanissi/modus-themes.nvim",
+      priority = 1000,
+      config = function()
+        -- vim.cmd.colorscheme("modus")
+      end
+    },
+    {
+      "EdenEast/nightfox.nvim",
+      priority = 1000,
+      config = function()
+        vim.cmd.colorscheme("terafox")
+
+        vim.opt.guicursor = "n-c-v:block,i:-ver10,a:Cursor/lCursor"
+
+        vim.api.nvim_set_hl(0, "Cursor", { bg = "#ff007b" })
+        vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })
+        vim.api.nvim_set_hl(0, "FloatBorder", { link = "Normal" })
+        vim.api.nvim_set_hl(0, "Pmenu", { link = "Normal" })
+      end
+    },
     "nvim-lua/plenary.nvim",
     "christoomey/vim-tmux-navigator",
     "HiPhish/rainbow-delimiters.nvim",
@@ -40,7 +89,7 @@ return {
         event = "VimEnter",
         opts = {
             keywords = {
-              WARN = { alt = { "ALAI" } },
+              ALAI = { icon = "📝", color = "#ff007b" }
             }
         },
     },
@@ -48,7 +97,9 @@ return {
       'echasnovski/mini.ai',
       version = false,
       config = function()
-        require('mini.ai').setup()
+        require('mini.ai').setup({
+          n_lines = 500
+        })
       end
     },
     {

@@ -1,12 +1,5 @@
 return {
     "folke/ts-comments.nvim",
-    opts = {
-        lang = {
-            typescript = {
-                "/** %s */",
-                "// %s"
-            }
-        }
-    },
+    opts = {},
     event = "VeryLazy",
 }

@@ -45,6 +45,10 @@ return {
     { "gr", function() Snacks.picker.lsp_references() end, desc = "LSP References" },
     { "gd", function() Snacks.picker.lsp_definitions() end, desc = "LSP Definition" },
     { "<leader>ls", function() Snacks.picker.lsp_symbols() end, desc = "LSP Symbols" },
+    { "<leader>z", function() Snacks.picker.zoxide() end, desc = "Zoxide" },
+    { "<leader>o", function() Snacks.picker() end, desc = "All pickers" },
+    { "<leader>t", function () Snacks.picker.todo_comments({ keywords = { "ALAI" } }) end, desc = "ALAI Comments" },
+
     {
       "<leader>r",
       function()
