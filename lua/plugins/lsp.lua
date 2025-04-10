@@ -52,8 +52,6 @@ return {
                 group = vim.api.nvim_create_augroup("UserLspConfig", {}),
                 callback = function(ev)
                     local opts = { noremap = true, buffer = ev.buf, silent = true }
-                    -- vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-                    -- vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
                     vim.keymap.set("n", "ge", vim.diagnostic.open_float, opts)
                     vim.keymap.set("n", "[d", function() vim.diagnostic.jump({count = 1, float = true}) end, opts)
                     vim.keymap.set("n", "]d", function() vim.diagnostic.jump({count = -1, float = true}) end, opts)
@@ -61,15 +59,6 @@ return {
                     vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
                     vim.keymap.set("n", "<leader>a", vim.lsp.buf.code_action, opts)
                     vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-
-                    -- vim.lsp.handlers["textDocument/hover"] =  vim.lsp.with(
-                    -- vim.lsp.handlers.hover, {
-                    --     border = "single",
-                    -- }
-                    -- )
-                    -- vim.lsp.handlers["textDocument/signatureHelp"] =  vim.lsp.with(
-                    -- vim.lsp.handlers.signature_help, {border = "single"}
-                    -- )
                 end,
             })
 
@@ -132,7 +121,6 @@ return {
                 ["eslint"] = function()
                     lspconfig.eslint.setup({
                         capabilities = capabilities,
-                        -- NOTE: FREELANCER ROOT_DIR
                         root_dir = function(fname)
                           -- Check if 'api-e2e' exists in the path
                           if string.match(fname, "api%-e2e") then
@@ -171,10 +159,11 @@ return {
                             ["language_server_psalm.threads"] = 16,
                             ["language_server_psalm.timeout"] = 60,
                             ["php_code_sniffer.enabled"] = false,
-                            -- ["php_code_sniffer.args"] = {'--standard=/home/alai/freelancer-dev/fl-gaf/phpcs_gaf.xml'},
                             ["prophecy.enabled"] = false,
                             ["language_server.diagnostic_outsource"] = false,
                             ["language_server.diagnostics_on_update"] = false,
+                            -- NOTE: This doesn't work with the current version of phpactor, we need to upgrade to PHP8.1
+                            -- ["php_code_sniffer.args"] = {'--standard=/home/alai/freelancer-dev/fl-gaf/phpcs_gaf.xml'},
                         }
                     })
                 end,
