@@ -17,6 +17,7 @@ return {
           border = 'single',
           winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:BlinkCmpMenuSelection,Search:None",
           draw = {
+            columns = { { "label", "label_description", gap = 1 }, { "kind" } },
             treesitter = { 'lsp' },
           }
         },

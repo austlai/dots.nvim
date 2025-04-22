@@ -2,6 +2,15 @@
 
 local set = vim.keymap.set
 
+-- Add numbered jumps to the jumplist
+set({ "n", "x" }, "j", function()
+  return vim.v.count > 1 and "m'" .. vim.v.count .. "j" or "j"
+end, { noremap = true, expr = true })
+
+set({ "n", "x" }, "k", function()
+  return vim.v.count > 1 and "m'" .. vim.v.count .. "k" or "k"
+end, { noremap = true, expr = true })
+
 set("i", "jk", "<esc>", { desc = "Set jk as escape" })
 set("i", "<C-l>", "<c-g>u<Esc>[s1z=`]a<c-g>u", { desc = "Fix spelling mistakes in line" })
 set("n", "<C-h>", "<C-w>h", { desc = "Move to different window" })

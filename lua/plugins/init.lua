@@ -83,7 +83,10 @@ return {
     },
     "nvim-lua/plenary.nvim",
     "christoomey/vim-tmux-navigator",
-    "HiPhish/rainbow-delimiters.nvim",
+    {
+      "HiPhish/rainbow-delimiters.nvim",
+      submodules = false
+    },
     {
         "folke/todo-comments.nvim",
         event = "VimEnter",

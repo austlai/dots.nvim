@@ -13,11 +13,12 @@ return {
                     "cssls",
                     "lua_ls",
                     "basedpyright",
-                    "phpactor@2023.09.24.0",
                     "eslint",
                     "marksman",
                     "intelephense",
                     "thriftls",
+                    "psalm@5.26.1"
+                    -- "phpactor@2023.09.24.0",
                     -- "angularls@17.3.2",
                 },
             })
@@ -67,11 +68,6 @@ return {
             local navbuddy = require("nvim-navbuddy")
 
             require("mason-lspconfig").setup_handlers({
-                function(server)
-                    lspconfig[server].setup({
-                        capabilities = capabilities,
-                    })
-                end,
                 -- ["angularls"] = function()
                 --   local angularls_path = require("mason-registry").get_package('angular-language-server'):get_install_path()
                 --   local cmd = {
@@ -136,43 +132,71 @@ return {
                         }
                     })
                 end,
-                ['phpactor'] = function()
-                    lspconfig.phpactor.setup({
-                        capabilities = capabilities,
-                        on_attach = function(client)
-                          client.server_capabilities.hoverProvider = false
-                          client.server_capabilities.documentSymbolProvider = false
-                          client.server_capabilities.referencesProvider = false
-                          client.server_capabilities.completionProvider = false
-                          client.server_capabilities.documentFormattingProvider = false
-                          client.server_capabilities.definitionProvider = false
-                          client.server_capabilities.implementationProvider = true
-                          client.server_capabilities.typeDefinitionProvider = false
-                          client.server_capabilities.diagnosticProvider = false
-                        end,
-                        init_options = {
-                            ["logging.enabled"] = false,
-                            ["logging.level"] = 'debug',
-                            ["logging.path"] = 'phpactor.log',
-                            ["language_server_phpstan.enabled"] = false,
-                            ["language_server_psalm.enabled"] = true,
-                            ["language_server_psalm.threads"] = 16,
-                            ["language_server_psalm.timeout"] = 60,
-                            ["php_code_sniffer.enabled"] = false,
-                            ["prophecy.enabled"] = false,
-                            ["language_server.diagnostic_outsource"] = false,
-                            ["language_server.diagnostics_on_update"] = false,
-                            -- NOTE: This doesn't work with the current version of phpactor, we need to upgrade to PHP8.1
-                            -- ["php_code_sniffer.args"] = {'--standard=/home/alai/freelancer-dev/fl-gaf/phpcs_gaf.xml'},
-                        }
-                    })
+                -- NOTE: Stopped using phpactor until we upgrade to php8.1
+                -- ['phpactor'] = function()
+                --     lspconfig.phpactor.setup({
+                --         capabilities = capabilities,
+                --         on_attach = function(client)
+                --           client.server_capabilities.hoverProvider = false
+                --           client.server_capabilities.documentSymbolProvider = false
+                --           client.server_capabilities.referencesProvider = false
+                --           client.server_capabilities.completionProvider = false
+                --           client.server_capabilities.documentFormattingProvider = false
+                --           client.server_capabilities.definitionProvider = false
+                --           client.server_capabilities.implementationProvider = true
+                --           client.server_capabilities.typeDefinitionProvider = false
+                --           client.server_capabilities.diagnosticProvider = false
+                --         end,
+                --         init_options = {
+                --             ["logging.enabled"] = false,
+                --             ["logging.level"] = 'debug',
+                --             ["logging.path"] = 'phpactor.log',
+                --             ["language_server_phpstan.enabled"] = false,
+                --             ["language_server_psalm.enabled"] = true,
+                --             ["language_server_psalm.threads"] = 16,
+                --             ["language_server_psalm.timeout"] = 60,
+                --             ["php_code_sniffer.enabled"] = false,
+                --             ["prophecy.enabled"] = false,
+                --             ["language_server.diagnostic_outsource"] = false,
+                --             ["language_server.diagnostics_on_update"] = false,
+                --             -- NOTE: This doesn't work with the current version of phpactor, we need to upgrade to php8.1
+                --             -- ["php_code_sniffer.args"] = {'--standard=/home/alai/freelancer-dev/fl-gaf/phpcs_gaf.xml'},
+                --         }
+                --     })
+                -- end,
+                -- ['intelephense'] = function()
+                --     lspconfig.intelephense.setup({
+                --         capabilities = capabilities,
+                --         on_attach = function(client, bufnr)
+                --           navbuddy.attach(client, bufnr)
+                --           client.server_capabilities.workspaceSymbolProvider = false
+                --         end,
+                --         settings = {
+                --           php = {
+                --             completion = {
+                --               callSnippet = "Replace"
+                --             }
+                --           }
+                --         },
+                --     })
+                -- end
+                --
+                ['psalm'] = function ()
+                  lspconfig.psalm.setup({
+                    cmd = { "./vendor/bin/psalm", "--language-server" },
+                    capabilities = capabilities,
+                    on_attach = function(client, bufnr)
+                      client.server_capabilities.completionProvider = false
+                      client.server_capabilities.hoverProvider = false
+                      client.server_capabilities.documentSymbolProvider = false
+                    end,
+                  })
                 end,
                 ['intelephense'] = function()
                     lspconfig.intelephense.setup({
                         capabilities = capabilities,
                         on_attach = function(client, bufnr)
                           navbuddy.attach(client, bufnr)
-                          client.server_capabilities.workspaceSymbolProvider = false
                         end,
                         settings = {
                           php = {
@@ -182,7 +206,12 @@ return {
                           }
                         },
                     })
-                end
+                end,
+                function(server)
+                  lspconfig[server].setup({
+                      capabilities = capabilities,
+                  })
+                end,
             })
         end
     },
