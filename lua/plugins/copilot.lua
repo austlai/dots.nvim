@@ -14,6 +14,7 @@ return {
   {
     "CopilotC-Nvim/CopilotChat.nvim",
     branch = "main",
+    enabled = false,
     dependencies = {
       { "zbirenbaum/copilot.lua" },
       { "nvim-lua/plenary.nvim" },
@@ -34,5 +35,42 @@ return {
       }
 
     },
-  }
+  },
+  {
+    "olimorris/codecompanion.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "zbirenbaum/copilot.lua",
+			"j-hui/fidget.nvim",
+    },
+    keys = {
+      { "<leader>cc", "<cmd>CodeCompanionChat Toggle<CR>" },
+    },
+    opts = {
+      strategies = {
+        chat = {
+          adapter = "copilot"
+        },
+        inline = {
+          adapter = "copilot"
+        }
+      },
+      show_defaults = false,
+			adapters = {
+				copilot = function()
+					return require("codecompanion.adapters").extend("copilot", {
+						schema = {
+							model = {
+								default = "claude-3.7-sonnet",
+							},
+						},
+					})
+				end,
+			},
+    },
+    init = function()
+      require("plugins.codecompanion.fidget-spinner"):init()
+    end,
+  },
 }

@@ -11,6 +11,13 @@ return {
     event = 'InsertEnter',
     opts = {
       keymap = { preset = 'default' },
+      fuzzy = {
+        sorts = {
+          'exact',
+          'score',
+          'sort_text'
+        }
+      },
       completion = {
         menu = {
           enabled = true,
