@@ -80,6 +80,15 @@ return {
         vim.api.nvim_set_hl(0, "Pmenu", { link = "Normal" })
       end
     },
+    {
+      'sainnhe/everforest',
+      lazy = false,
+      priority = 1000,
+      config = function()
+        vim.g.everforest_enable_italic = true
+        -- vim.cmd.colorscheme('everforest')
+      end
+    },
     "nvim-lua/plenary.nvim",
     "christoomey/vim-tmux-navigator",
     {

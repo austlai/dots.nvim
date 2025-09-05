@@ -7,18 +7,25 @@ return {
       dap.adapters.php = {
         type = "executable",
         command = "node",
-        args = { os.getenv("HOME") .. "/vscode-php-debug/out/phpDebug.js" }
+        args = { os.getenv("HOME") .. "/external-repos/vscode-php-debug/out/phpDebug.js" }
       }
 
       dap.configurations.php = {
         {
-          name = "Neovim XDebug",
+          name = "Neovim Remote XDebug",
           type = "php",
           request = "launch",
           port = 9003,
           pathMappings = {
               ["/mnt/gaf"] = os.getenv("HOME") .. "/freelancer-dev/fl-gaf"
           },
+          log = true
+        },
+        {
+          name = "Neovim Local XDebug",
+          type = "php",
+          request = "launch",
+          port = 9003,
           log = true
         }
       }

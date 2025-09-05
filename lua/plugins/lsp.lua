@@ -12,6 +12,7 @@ return {
                 ensure_installed = {
                     "html",
                     "cssls",
+                    "clangd",
                     "lua_ls",
                     "basedpyright",
                     "eslint",
