@@ -11,6 +11,21 @@ return {
         end
     },
     {
+      "vague-theme/vague.nvim",
+      lazy = false, -- make sure we load this during startup if it is your main colorscheme
+      priority = 1000, -- make sure to load this before all the other plugins
+      config = function()
+        vim.cmd.colorscheme("vague")
+
+        vim.opt.guicursor = "n-c-v:block,i:-ver10,a:Cursor/lCursor"
+
+        vim.api.nvim_set_hl(0, "Cursor", { bg = "#ff007b" })
+        vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })
+        vim.api.nvim_set_hl(0, "FloatBorder", { link = "Normal" })
+        vim.api.nvim_set_hl(0, "Pmenu", { link = "Normal" })
+      end
+    },
+    {
       "rose-pine/neovim",
       lazy = false,
       priority = 1000,
@@ -70,14 +85,14 @@ return {
       "EdenEast/nightfox.nvim",
       priority = 1000,
       config = function()
-        vim.cmd.colorscheme("terafox")
-
-        vim.opt.guicursor = "n-c-v:block,i:-ver10,a:Cursor/lCursor"
-
-        vim.api.nvim_set_hl(0, "Cursor", { bg = "#ff007b" })
-        vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })
-        vim.api.nvim_set_hl(0, "FloatBorder", { link = "Normal" })
-        vim.api.nvim_set_hl(0, "Pmenu", { link = "Normal" })
+        -- vim.cmd.colorscheme("terafox")
+        --
+        -- vim.opt.guicursor = "n-c-v:block,i:-ver10,a:Cursor/lCursor"
+        --
+        -- vim.api.nvim_set_hl(0, "Cursor", { bg = "#ff007b" })
+        -- vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })
+        -- vim.api.nvim_set_hl(0, "FloatBorder", { link = "Normal" })
+        -- vim.api.nvim_set_hl(0, "Pmenu", { link = "Normal" })
       end
     },
     {

@@ -19,11 +19,13 @@ return {
                     "marksman",
                     "intelephense",
                     "thriftls",
-                    -- "psalm@5.26.1"
-                    "phpactor@2023.09.24.0",
-                    -- "angularls@17.3.2",
+                    --"phpactor@2023.09.24.0",
+                    "phpactor",
+                    --"angularls@18.2.0",
                     "hls",
                     "gopls",
+                    "puppet",
+                    "vtsls"
                 },
             })
 
@@ -163,7 +165,7 @@ return {
                             ["language_server.diagnostic_outsource"] = false,
                             ["language_server.diagnostics_on_update"] = false,
                             -- NOTE: This doesn't work with the current version of phpactor, we need to upgrade to php8.1
-                            -- ["php_code_sniffer.args"] = {'--standard=/home/alai/freelancer-dev/fl-gaf/phpcs_gaf.xml'},
+                            ["php_code_sniffer.args"] = {'--standard=/home/alai/freelancer-dev/hehe.xml'},
                         }
                     })
                 end,

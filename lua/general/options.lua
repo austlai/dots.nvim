@@ -23,3 +23,7 @@ vim.g.mapleader = " "
 -- disable netrw for NvimTree
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+
+-- testing options
+vim.o.updatetime = 200
+vim.o.virtualedit = "block"
