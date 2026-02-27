@@ -1,13 +1,17 @@
 return {
   "folke/sidekick.nvim",
+  config = function()
+      require("sidekick").setup()
+  end,
   keys = {
-    -- Add keybindings for navigating and applying edit suggestions
-
     {
-      "<C-tab>",
+      "<C-y>",
       function()
-        require("sidekick").nes_jump_or_apply()
+        if require("sidekick").nes_jump_or_apply() then
+          return
+        end
       end,
+      mode = { "n" },
       expr = true,
       desc = "Goto/Apply Next Edit Suggestion",
     },
@@ -25,8 +29,8 @@ return {
     },
     {
       "<leader>cc",
-      function() require("sidekick.cli").toggle({ name = "claude", focus = true }) end,
-      desc = "Sidekick Toggle Claude",
+      function() require("sidekick.cli").toggle({ focus = true }) end,
+      desc = "Sidekick Toggle Cli",
     },
   },
 }
