@@ -23,7 +23,7 @@ return {
           vim.keymap.set("n", "[d", function() vim.diagnostic.jump({count = 1, float = true}) end, opts)
           vim.keymap.set("n", "]d", function() vim.diagnostic.jump({count = -1, float = true}) end, opts)
           vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-          vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
+          vim.keymap.set("n", "<M-k>", vim.lsp.buf.signature_help, opts)
           vim.keymap.set("n", "<leader>a", vim.lsp.buf.code_action, opts)
           vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
         end,
