@@ -4,20 +4,6 @@ return {
   config = function()
     local lint = require("lint")
 
-    --TODO: Update the params for these based on `.arclint` (:
-
-    -- NOTE: Not working (even without configuration), setup with phpactor lsp instead...
-    -- local psalm = lint.linters.psalm
-    -- psalm.cmd = "./vendor/bin/psalm"
-    -- psalm.args = {
-    --   "--output-format=json",
-    --   "--show-info=true",
-    --   "--no-progress",
-    --   "--threads=16",
-    --   "--config=/home/alai/freelancer-dev/fl-gaf/psalm.xml",
-    --   "--use-baseline=/home/alai/freelancer-dev/fl-gaf/psalm-baseline.xml"
-    -- }
-
     local phpcs = lint.linters.phpcs
     phpcs.cmd = "./vendor/bin/phpcs"
     phpcs.args = {

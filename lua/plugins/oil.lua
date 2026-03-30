@@ -4,7 +4,8 @@ return {
   dependencies = { "nvim-tree/nvim-web-devicons" },
   lazy = false,
   config = function()
-    require("oil").setup({
+    local oil = require("oil")
+    oil.setup({
       view_options = {
         show_hidden = true,
       },
@@ -17,7 +18,18 @@ return {
         preview_split = "right"
       },
       keymaps = {
-        ["gp"] = { "actions.copy_entry_path", mode = "n" },
+        ["gp"] = {
+          callback = function ()
+            local entry = oil.get_cursor_entry()
+            local dir = oil.get_current_dir()
+            if not entry or not dir then
+              return
+            end
+            local relpath = vim.fn.fnamemodify(dir, ":.")
+            vim.fn.setreg("+", relpath..entry.name)
+          end,
+          mode = "n"
+        },
       }
     })
 

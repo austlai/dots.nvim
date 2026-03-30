@@ -36,11 +36,11 @@ return {
     },
   },
   keys ={
-    --{ "<C-g>", function() Snacks.picker.grep() end, desc = "Grep" },
+    { "<C-g>", function() Snacks.picker.grep() end, desc = "Grep" },
     { "<C-b>", function() Snacks.picker.buffers() end, desc = "Buffers" },
     { "<leader>g", function() Snacks.picker.git_status() end, desc = "Git Status" },
     { "<leader>p", function() Snacks.picker.resume() end, desc = "Previous Picker" },
-    --{ "<C-f>", function() Snacks.picker.smart({ supports_live = true }) end, desc = "Find Files" },
+    -- { "<C-f>", function() Snacks.picker.smart({ supports_live = true }) end, desc = "Find Files" },
     { "<leader>j", function() Snacks.picker.jumps() end, desc = "Jump list" },
     { "gr", function() Snacks.picker.lsp_references() end, desc = "LSP References" },
     { "gd", function() Snacks.picker.lsp_definitions() end, desc = "LSP Definition" },

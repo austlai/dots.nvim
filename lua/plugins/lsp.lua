@@ -34,7 +34,7 @@ return {
         'cssls',
         'clangd',
         'lua_ls',
-        'basedpyright',
+        -- 'basedpyright',
         'eslint',
         'marksman',
         'intelephense',
@@ -44,7 +44,7 @@ return {
         'gopls',
         'puppet',
         'vtsls',
-        'copilot'
+        'ty',
       })
     end
   },

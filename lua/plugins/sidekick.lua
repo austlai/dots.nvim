@@ -1,7 +1,11 @@
 return {
   "folke/sidekick.nvim",
   config = function()
-      require("sidekick").setup()
+    require("sidekick").setup({
+      nes = {
+        enabled = false
+      }
+    })
   end,
   keys = {
     {

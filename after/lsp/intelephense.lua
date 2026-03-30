@@ -4,6 +4,9 @@ return {
   end,
   settings = {
     intelephense = {
+      environment = {
+        phpVersion = "8.1"
+      },
       completion = {
         callSnippet = "Replace"
       }

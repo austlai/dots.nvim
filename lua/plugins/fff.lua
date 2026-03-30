@@ -3,16 +3,19 @@ return {
   build = function()
     require("fff.download").download_or_build_binary()
   end,
-  opts = { },
+  opts = {
+    keymaps = {
+      move_up = { '<Up>', '<C-k>' },
+      move_down = { '<Down>', '<C-j>' },
+      preview_scroll_up = '<C-b>',
+      preview_scroll_down = '<C-f>',
+    }
+  },
   lazy = false,
   keys = {
     {
-      "<C-f>", -- try it if you didn't it is a banger keybinding for a picker
+      "<C-f>",
       function() require('fff').find_files() end,
-    },
-    {
-      "<C-g>",
-      function() require('fff').live_grep() end,
     },
   }
 }

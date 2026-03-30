@@ -3,7 +3,7 @@ return {
     'saghen/blink.cmp',
     dependencies = {
       'rafamadriz/friendly-snippets',
-      'fang2hou/blink-copilot',
+      -- 'fang2hou/blink-copilot',
       { 'L3MON4D3/LuaSnip', version = 'v2.*' },
     },
     version = '*',
@@ -50,14 +50,20 @@ return {
             score_offset = 80,
             async = true
           },
-          copilot = {
-            name = "copilot",
-            module = "blink-copilot",
-            score_offset = 100,
-            async = true,
-          },
+          -- copilot = {
+          --   name = "copilot",
+          --   module = "blink-copilot",
+          --   score_offset = 100,
+          --   async = true,
+          -- },
         },
-        default = { "lsp", "path", "snippets", "buffer", "copilot" },
+        default = {
+          "lsp",
+          "path",
+          "snippets",
+          "buffer",
+          -- "copilot"
+        },
       },
       appearance = {
         use_nvim_cmp_as_default = true,
