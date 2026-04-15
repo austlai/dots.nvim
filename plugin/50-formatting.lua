@@ -28,14 +28,14 @@ end, { desc = "Format buffer" })
 -- Lint
 local lint = require("lint")
 
-local phpcs = lint.linters.phpcs
-phpcs.cmd = "./vendor/bin/phpcs"
-phpcs.args = {
-  "-q",
-  "--report=json",
-  "--standard=/home/alai/freelancer-dev/fl-gaf/phpcs_gaf.xml",
-  "-",
-}
+-- local phpcs = lint.linters.phpcs
+-- phpcs.cmd = "./vendor/bin/phpcs"
+-- phpcs.args = {
+--   "-q",
+--   "--report=json",
+--   "--standard=/home/alai/freelancer-dev/fl-gaf/phpcs_gaf.xml",
+--   "-",
+-- }
 
 local phpstan = lint.linters.phpstan
 phpstan.cmd = "./vendor/bin/phpstan"

@@ -38,8 +38,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(ev)
     local opts = { noremap = true, buffer = ev.buf, silent = true }
     vim.keymap.set("n", "ge", vim.diagnostic.open_float, opts)
-    vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = 1, float = true }) end, opts)
-    vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = -1, float = true }) end, opts)
+    vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end, opts)
+    vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end, opts)
     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
     vim.keymap.set("n", "<M-k>", vim.lsp.buf.signature_help, opts)
     vim.keymap.set("n", "<leader>a", vim.lsp.buf.code_action, opts)
