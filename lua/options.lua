@@ -27,3 +27,6 @@ vim.g.loaded_netrwPlugin = 1
 -- testing options
 vim.o.updatetime = 200
 vim.o.virtualedit = "block"
+
+-- Must be set before ftplugin files load (needed by treesitter-textobjects)
+vim.g.no_plugin_maps = true

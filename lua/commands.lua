@@ -29,7 +29,11 @@ TrimWhitespace = function()
 end
 
 vim.api.nvim_create_autocmd("BufWritePre", {
-    command = [[lua TrimWhitespace()]],
+    callback = function()
+        if vim.bo.buftype == '' then
+            TrimWhitespace()
+        end
+    end,
     desc = "Remove trailing whitespace on write",
 })
 

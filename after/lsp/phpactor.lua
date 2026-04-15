@@ -22,6 +22,5 @@ return {
     ["prophecy.enabled"] = false,
     ["language_server.diagnostic_outsource"] = false,
     ["language_server.diagnostics_on_update"] = false,
-    ["php_code_sniffer.args"] = {'--standard=/home/alai/freelancer-dev/hehe.xml'},
   }
 }
