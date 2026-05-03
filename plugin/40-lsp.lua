@@ -75,6 +75,7 @@ vim.lsp.enable({
   'phpactor',
   'phpantom',
   'puppet',
+  'rust_analyzer',
   'taplo',
   'thriftls',
   'ty',
