@@ -5,7 +5,7 @@ return {
   on_attach = function(client, bufnr)
     -- Let intelephense/phpactor handle these
     client.server_capabilities.hoverProvider = false
-    client.server_capabilities.definitionProvider = false
+    client.server_capabilities.definitionProvider = true
     client.server_capabilities.typeDefinitionProvider = false
     client.server_capabilities.implementationProvider = false
     client.server_capabilities.referencesProvider = false

@@ -21,6 +21,7 @@ return {
     ["php_code_sniffer.enabled"] = false,
     ["prophecy.enabled"] = false,
     ["language_server.diagnostic_outsource"] = false,
+    ["language_server.diagnostic_ignore_codes"] = { "worse.docblock_missing_param", "worse.unresolved_name" },
     ["language_server.diagnostics_on_update"] = false,
   }
 }

@@ -16,6 +16,9 @@ require("snacks").setup({
     enabled = true,
     previewers = { git = { native = true } },
     formatters = { file = { filename_first = true } },
+    matcher = {
+      frecency = true
+    },
     layout = {
       cycle = false,
       reverse = true,
@@ -43,13 +46,74 @@ require("snacks").setup({
 })
 
 vim.keymap.set("n", "<C-g>", function() Snacks.picker.grep() end, { desc = "Grep" })
-vim.keymap.set("n", "<C-b>", function() Snacks.picker.buffers() end, { desc = "Buffers" })
-vim.keymap.set("n", "<C-f>", function() Snacks.picker.files() end, { desc = "Files" })
+vim.keymap.set("n", "<C-b>", function() Snacks.picker.buffers({ hidden = true }) end, { desc = "Buffers" })
+vim.keymap.set("n", "<C-f>", function() Snacks.picker.files({ hidden = true }) end, { desc = "Files" })
 vim.keymap.set("n", "<leader>g", function() Snacks.picker.git_status() end, { desc = "Git Status" })
+vim.keymap.set("n", "<leader>bl", function() Snacks.picker.git_log_file() end, { desc = "Git Status" })
 vim.keymap.set("n", "<leader>p", function() Snacks.picker.resume() end, { desc = "Previous Picker" })
 vim.keymap.set("n", "<leader>j", function() Snacks.picker.jumps() end, { desc = "Jump list" })
 vim.keymap.set("n", "gr", function() Snacks.picker.lsp_references() end, { desc = "LSP References" })
-vim.keymap.set("n", "gd", function() Snacks.picker.lsp_definitions() end, { desc = "LSP Definition" })
+
+local function goto_definition_race()
+  local clients = vim.lsp.get_clients({ bufnr = 0, method = "textDocument/definition" })
+  if #clients == 0 then
+    vim.notify("No LSP client supports definition", vim.log.levels.WARN)
+    return
+  end
+
+  local done = false
+  local pending = {}
+  local errors = 0
+  local empties = 0
+  local total = #clients
+
+  local function cancel_others(winner_id)
+    for c, id in pairs(pending) do
+      if c.id ~= winner_id then
+        pcall(function() c:cancel_request(id) end)
+      end
+    end
+  end
+
+  for _, client in ipairs(clients) do
+    local enc = client.offset_encoding
+    local params = vim.lsp.util.make_position_params(0, enc)
+    local ok, req_id = client:request("textDocument/definition", params, function(err, result)
+      if done then return end
+      if err then
+        errors = errors + 1
+        if errors + empties == total then
+          done = true
+          vim.notify("All definition requests failed", vim.log.levels.WARN)
+        end
+        return
+      end
+      if not result or (vim.islist(result) and #result == 0) then
+        empties = empties + 1
+        if errors + empties == total then
+          done = true
+          vim.notify("No definition found", vim.log.levels.WARN)
+        end
+        return
+      end
+      done = true
+      cancel_others(client.id)
+      local loc = vim.islist(result) and result[1] or result
+      vim.lsp.util.show_document(loc, enc, { focus = true })
+    end, 0)
+    if ok then pending[client] = req_id end
+  end
+
+  vim.defer_fn(function()
+    if not done then
+      done = true
+      cancel_others(-1)
+      vim.notify("Definition request timed out", vim.log.levels.WARN)
+    end
+  end, 2000)
+end
+
+vim.keymap.set("n", "gd", goto_definition_race, { desc = "LSP Definition (race)" })
 vim.keymap.set("n", "gi", function() Snacks.picker.lsp_implementations() end, { desc = "LSP Implementations" })
 vim.keymap.set("n", "<leader>ls", function() Snacks.picker.lsp_symbols() end, { desc = "LSP Symbols" })
 vim.keymap.set("n", "<leader>z", function() Snacks.picker.zoxide() end, { desc = "Zoxide" })

@@ -1,10 +1,6 @@
 vim.pack.add({
-  'https://github.com/mbbill/undotree',
   'https://github.com/alaifln/open-link.nvim',
 })
-
--- Undotree
-vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 
 -- Open Link
 local expanders = require("open-link.expanders")

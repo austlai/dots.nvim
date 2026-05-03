@@ -36,3 +36,45 @@ set('n', '<Leader>K', '<cmd>Treewalker Up<cr>', { silent = false })
 set('n', '<Leader>L', '<cmd>Treewalker Right<cr>', { silent = false })
 set('n', '<Leader>H', '<cmd>Treewalker Left<cr>', { silent = false })
 set('n', '<leader>td', function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end, { silent = true, noremap = true })
+
+set({ 'n', 'x' }, '<Leader>yp', function()
+  local rel = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ':.')
+  local mode = vim.fn.mode()
+  local suffix
+  if mode == 'v' or mode == 'V' then
+    local s, e = vim.fn.line('v'), vim.fn.line('.')
+    if s > e then s, e = e, s end
+    suffix = (s == e) and (':' .. s) or (':' .. s .. '-' .. e)
+  else
+    suffix = ':' .. vim.fn.line('.')
+  end
+
+  local parts = {}
+  local node = vim.treesitter.get_node()
+  while node do
+    local t = node:type()
+    if t:match('function') or t:match('method') or t:match('class') then
+      local name = node:field('name')[1]
+      if name then table.insert(parts, 1, vim.treesitter.get_node_text(name, 0)) end
+    end
+    node = node:parent()
+  end
+
+  local items = { rel .. suffix }
+  if #parts > 0 then
+    table.insert(items, table.concat(parts, '::') .. suffix)
+  end
+
+  vim.ui.select(
+    items,
+    {
+      prompt = 'Copy path:',
+      snacks = { layout = { preset = 'select', preview = false } },
+    },
+    function(choice)
+      if choice then vim.fn.setreg('+', choice) end
+    end
+  )
+end, { desc = 'Yank file path / symbol path' })
+
+
