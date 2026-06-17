@@ -1,0 +1,112 @@
+" Plugins
+set commentary
+set highlightedyank
+set mini-ai
+set surround
+set VimEverywhere
+set ideajoin
+set NERDTree
+set functextobj
+set matchit
+Plug 'wellle/targets.vim'
+
+set textwidth=150
+set number
+set clipboard+=unnamed,unnamedplus
+set virtualedit=block
+set ignorecase
+set smartcase
+set incsearch
+set hlsearch
+set scrolloff=4
+set incsearch
+set rnu
+set ideastatusicon=gray
+set history=10000
+
+let mapleader=" "
+
+inoremap jk <Esc>
+
+" Add numbered jumps to jumplist
+nnoremap <expr> j (v:count > 1 ? "m'" . v:count . 'j' : 'j')
+nnoremap <expr> k (v:count > 1 ? "m'" . v:count . 'k' : 'k')
+xnoremap <expr> j (v:count > 1 ? "m'" . v:count . 'j' : 'j')
+xnoremap <expr> k (v:count > 1 ? "m'" . v:count . 'k' : 'k')
+
+" Window navigation
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" Disable Ex mode
+nnoremap Q <Nop>
+
+" Center next match
+nnoremap n nzz
+nnoremap N Nzz
+
+" Paste from system clipboard in command line
+cnoremap <C-v> <C-r>"
+inoremap <C-v> <C-r>*
+
+vnoremap < <gv
+vnoremap > >gv
+
+map <C-o> <Action>(Back)
+map <C-i> <Action>(Forward)
+
+map <Leader>db :split .idea/query-dev.sql<CR>
+
+map <C-a>z <Action>(ToggleDistractionFreeMode)
+
+" Like leap, or flash, or hop
+map s <Action>(AceAction)
+
+map ge <Action>(ShowErrorDescription)
+
+map <Leader>bp <Action>(ToggleLineBreakpoint)
+map K <Action>(ShowHoverInfo)
+
+map <C-f> <Action>(GotoFile)
+map <C-g> <Action>(FindInPath)
+
+map <C-b> <Action>(Switcher)
+
+map gcc <Action>(CommentByLineComment)
+
+map <Leader>g <Action>(Vcs.Show.Local.Changes)
+map <Leader>bl <Action>(Vcs.ShowTabbedFileHistory)
+map <Leader>h <Action>(CallHierarchy)
+
+map <Leader>t <Action>(ActivateTODOToolWindow)
+map <Leader>f <Action>(ActivateProjectToolWindow)
+map <Leader>s <Action>(SelectInProjectView)
+map <Leader>o <Action>(ActivateStructureToolWindow)
+
+map <Leader>J <Action>(MethodDown)
+map <Leader>K <Action>(MethodUp)
+map <Leader>H <Action>(EditorCodeBlockStart)
+map <Leader>L <Action>(EditorCodeBlockEnd)
+
+map <Leader>yp <Action>(CopyReference)
+
+map gr        <Action>(FindUsages)
+map gd        <Action>(GotoDeclaration)
+map gi        <Action>(GotoImplementation)
+map ge        <Action>(ShowErrorDescription)
+map [d        <Action>(GotoPreviousError)
+map ]d        <Action>(GotoNextError)
+map K         <Action>(QuickJavaDoc)
+map <Leader>a <Action>(ShowIntentionActions)
+map <Leader>rn <Action>(RenameElement)
+
+map ]g         <Action>(VcsShowNextChangeMarker)
+map [g         <Action>(VcsShowPrevChangeMarker)
+map <Leader>hb <Action>(Annotate)
+
+map <Leader>q  <Action>(HideAllWindows)
+
+map <C-S-b> <Action>(ViewToolBar)
+map <Leader>p <Action>(SearchEverywhere)
