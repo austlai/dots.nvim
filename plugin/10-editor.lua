@@ -17,7 +17,13 @@ require("nvim-surround").setup()
 require("ts-comments").setup({})
 
 -- Autotag
-require("nvim-ts-autotag").setup()
+require("nvim-ts-autotag").setup({
+  per_filetype = {
+    ['php'] = {
+      enable_close = false
+    }
+  }
+})
 
 -- Matchup
 vim.g.matchup_matchparen_offscreen = { method = "popup" }
