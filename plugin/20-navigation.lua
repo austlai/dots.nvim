@@ -12,12 +12,15 @@ require("snacks").setup({
   bigfile = { enabled = true },
   indent = { enabled = true },
   notifier = { enabled = true },
+  words = { enabled = true },
   picker = {
     enabled = true,
     previewers = { git = { native = true } },
     formatters = { file = { filename_first = true } },
     matcher = {
-      frecency = true
+      frecency = true,
+      smartcase = false,
+      ignorecase = true,
     },
     layout = {
       cycle = false,
@@ -49,7 +52,8 @@ vim.keymap.set("n", "<C-g>", function() Snacks.picker.grep() end, { desc = "Grep
 vim.keymap.set("n", "<C-b>", function() Snacks.picker.buffers({ hidden = true }) end, { desc = "Buffers" })
 vim.keymap.set("n", "<C-f>", function() Snacks.picker.files({ hidden = true }) end, { desc = "Files" })
 vim.keymap.set("n", "<leader>g", function() Snacks.picker.git_status() end, { desc = "Git Status" })
-vim.keymap.set("n", "<leader>bl", function() Snacks.picker.git_log_file() end, { desc = "Git Status" })
+vim.keymap.set("n", "<leader>bf", function() Snacks.picker.git_log_file() end, { desc = "Git Blame File" })
+vim.keymap.set("n", "<leader>bl", function() Snacks.picker.git_log_line() end, { desc = "Git Blame Line" })
 vim.keymap.set("n", "<leader>p", function() Snacks.picker.resume() end, { desc = "Previous Picker" })
 vim.keymap.set("n", "<leader>j", function() Snacks.picker.jumps() end, { desc = "Jump list" })
 vim.keymap.set("n", "gr", function() Snacks.picker.lsp_references() end, { desc = "LSP References" })

@@ -3,7 +3,7 @@ vim.pack.add({
   'https://github.com/neovim/nvim-lspconfig',
   'https://github.com/L3MON4D3/LuaSnip',
   'https://github.com/rafamadriz/friendly-snippets',
-  { src = 'https://github.com/saghen/blink.cmp', version = 'v1' },
+  { src = 'https://github.com/saghen/blink.cmp', version = vim.version.range('1') },
   'https://github.com/folke/lazydev.nvim',
   'https://github.com/Bilal2453/luvit-meta',
   'https://github.com/nvim-lua/plenary.nvim',
@@ -79,6 +79,7 @@ vim.lsp.enable({
   'taplo',
   'thriftls',
   'ty',
+  'basedpyright',
   'vtsls',
   'yamlls',
 })
@@ -99,7 +100,7 @@ vim.api.nvim_create_autocmd('InsertEnter', {
       end,
       keymap = { preset = 'default' },
       fuzzy = {
-        implementation = 'lua',
+        implementation = 'prefer_rust_with_warning',
         sorts = { 'exact', 'score', 'sort_text' },
       },
       completion = {

@@ -13,6 +13,7 @@ vim.opt.clipboard = "unnamedplus"
 vim.opt.number = true
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 vim.opt.inccommand = 'split'
+vim.opt.splitkeep = "screen"
 
 vim.o.winborder = 'single'
 

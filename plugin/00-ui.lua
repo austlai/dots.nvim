@@ -32,12 +32,18 @@ require("rose-pine").setup({
 vim.g.edge_enable_italic = true
 vim.g.everforest_enable_italic = true
 
+-- Reapply custom highlights whenever the colorscheme changes
+vim.api.nvim_create_autocmd("ColorScheme", {
+  callback = function()
+    vim.api.nvim_set_hl(0, "Cursor", { bg = "#ff007b" })
+    vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })
+    vim.api.nvim_set_hl(0, "FloatBorder", { link = "Normal" })
+    vim.api.nvim_set_hl(0, "Pmenu", { link = "Normal" })
+  end,
+})
+
 vim.cmd.colorscheme("jellybeans")
 vim.opt.guicursor = "n-c-v:block,i:-ver10,a:Cursor/lCursor"
-vim.api.nvim_set_hl(0, "Cursor", { bg = "#ff007b" })
-vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })
-vim.api.nvim_set_hl(0, "FloatBorder", { link = "Normal" })
-vim.api.nvim_set_hl(0, "Pmenu", { link = "Normal" })
 
 -- Lualine
 require("lualine").setup({

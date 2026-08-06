@@ -3,6 +3,10 @@ return {
     client.server_capabilities.workspaceSymbolProvider = false
     client.server_capabilities.completionProvider = false
     client.server_capabilities.signatureHelpProvider = false
+    client.server_capabilities.diagnosticProvider = false
+    client.server_capabilities.hoverProvider = false
+    client.server_capabilities.renameProvider = false
+    client.server_capabilities.referencesProvider = false
   end,
   settings = {
     intelephense = {

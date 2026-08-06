@@ -9,6 +9,7 @@ return {
     client.server_capabilities.implementationProvider = true
     client.server_capabilities.typeDefinitionProvider = false
     client.server_capabilities.diagnosticProvider = false
+    client.server_capabilities.renameProvider = false
   end,
   init_options = {
     ["logging.enabled"] = false,

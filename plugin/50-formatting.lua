@@ -22,7 +22,9 @@ vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 
 vim.keymap.set("", "<leader>F", function()
   require("conform").format({ async = true })
-  vim.cmd("EslintFixAll")
+  if vim.fn.exists(":EslintFixAll") == 2 then
+    vim.cmd("EslintFixAll")
+  end
 end, { desc = "Format buffer" })
 
 -- Lint
