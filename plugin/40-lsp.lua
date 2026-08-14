@@ -5,7 +5,6 @@ vim.pack.add({
   'https://github.com/rafamadriz/friendly-snippets',
   { src = 'https://github.com/saghen/blink.cmp', version = vim.version.range('1') },
   'https://github.com/folke/lazydev.nvim',
-  'https://github.com/Bilal2453/luvit-meta',
   'https://github.com/nvim-lua/plenary.nvim',
   'https://github.com/antosha417/nvim-lsp-file-operations',
   'https://github.com/b0o/SchemaStore.nvim',
@@ -143,7 +142,6 @@ vim.api.nvim_create_autocmd('InsertEnter', {
         default = { "neocursor", "lsp", "path", "snippets", "buffer" },
       },
       appearance = {
-        use_nvim_cmp_as_default = true,
         nerd_font_variant = 'mono',
       },
     })
@@ -162,7 +160,7 @@ vim.api.nvim_create_autocmd('FileType', {
   callback = function()
     require("lazydev").setup({
       library = {
-        { path = "luvit-meta/library", words = { "vim%.uv" } },
+        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
       },
     })
   end,

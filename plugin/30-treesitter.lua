@@ -63,10 +63,7 @@ vim.pack.add({
 })
 
 -- Treesitter Context
-require("treesitter-context").setup({
-  enable = true,
-  multiwindow = false,
-})
+require("treesitter-context").setup()
 
 -- Treewalker
 require("treewalker").setup({

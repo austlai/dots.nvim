@@ -4,14 +4,12 @@ vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
-vim.opt.smartindent = false
 vim.opt.cursorline = true
 vim.opt.showmatch = true
 vim.opt.colorcolumn = "150"
 vim.opt.textwidth = 150
 vim.opt.clipboard = "unnamedplus"
 vim.opt.number = true
-vim.opt.completeopt = { "menu", "menuone", "noselect" }
 vim.opt.inccommand = 'split'
 vim.opt.splitkeep = "screen"
 

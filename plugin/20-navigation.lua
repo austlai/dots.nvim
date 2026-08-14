@@ -27,7 +27,6 @@ require("snacks").setup({
     matcher = {
       frecency = true,
       smartcase = false,
-      ignorecase = true,
     },
     layout = {
       cycle = false,
