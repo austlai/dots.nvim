@@ -38,6 +38,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(ev)
     local opts = { noremap = true, buffer = ev.buf, silent = true }
     vim.keymap.set("n", "ge", vim.diagnostic.open_float, opts)
+    vim.keymap.set("n", "gE", function() Snacks.picker.diagnostics_buffer() end, opts)
     vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end, opts)
     vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end, opts)
     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
@@ -46,6 +47,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
     vim.keymap.set("n", "<leader>ih", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = ev.buf })) end, opts)
     vim.keymap.set("n", "<leader>cl", vim.lsp.codelens.run, opts)
+    vim.keymap.set("n", "<leader>hs", function() vim.lsp.buf.typehierarchy('subtypes') end, opts)
+    vim.keymap.set("n", "<leader>hS", function() vim.lsp.buf.typehierarchy('supertypes') end, opts)
 
     vim.defer_fn(function()
       if vim.api.nvim_buf_is_valid(ev.buf) then
@@ -106,8 +109,6 @@ vim.api.nvim_create_autocmd('InsertEnter', {
       completion = {
         menu = {
           enabled = true,
-          border = 'single',
-          winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:BlinkCmpMenuSelection,Search:None",
           draw = {
             columns = { { "label", "label_description", gap = 1 }, { "kind" } },
             treesitter = { 'lsp' },
@@ -115,19 +116,12 @@ vim.api.nvim_create_autocmd('InsertEnter', {
         },
         documentation = {
           auto_show = true,
-          window = {
-            border = 'single',
-            winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:BlinkCmpDocCursorLine,Search:None",
-          },
         },
+        -- neocursor's inline suggestions render through this instead of the
+        -- plugin's own extmark (see render.inline = false in 90-ai.lua)
+        ghost_text = { enabled = true },
       },
-      signature = {
-        enabled = true,
-        window = {
-          border = 'single',
-          winhighlight = 'Normal:Normal,FloatBorder:FloatBorder',
-        },
-      },
+      signature = { enabled = true },
       snippets = { preset = 'luasnip' },
       sources = {
         providers = {
@@ -135,14 +129,29 @@ vim.api.nvim_create_autocmd('InsertEnter', {
             score_offset = 80,
             async = true,
           },
+          neocursor = {
+            module = 'neocursor.blink',
+            name = 'neocursor',
+            -- synchronous: it only reads the suggestion neocursor already
+            -- fetched on its own debounce, so there is nothing to wait for
+            async = false,
+            -- above lsp's 80, so a Cursor suggestion takes the top row and owns
+            -- <C-y>. Drop it below 80 if that starts getting in the way.
+            score_offset = 100,
+          },
         },
-        default = { "lsp", "path", "snippets", "buffer" },
+        default = { "neocursor", "lsp", "path", "snippets", "buffer" },
       },
       appearance = {
         use_nvim_cmp_as_default = true,
         nerd_font_variant = 'mono',
       },
     })
+
+    -- Not optional: blink only builds a provider once something asks it for
+    -- completions, so neocursor.blink would stay unloaded until the menu opens
+    -- — and opening the menu is the thing it exists to do.
+    require('neocursor.blink').setup()
   end,
 })
 

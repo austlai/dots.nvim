@@ -39,22 +39,10 @@ local lint = require("lint")
 --   "-",
 -- }
 
-local phpstan = lint.linters.phpstan
-phpstan.cmd = "./vendor/bin/phpstan"
-phpstan.args = {
-  'analyse',
-  '--no-progress',
-  '--error-format=json',
-  '--memory-limit=-1',
-  '--no-ansi',
-  '--no-interaction',
-  '--configuration=/home/alai/freelancer-dev/fl-gaf/phpstan.neon',
-}
-
+-- phpstan is proxied by phpantom (editor mode, on save) — see .phpantom.toml
 lint.linters_by_ft = {
   php = {
     -- "phpcs",
-    "phpstan"
   },
 }
 

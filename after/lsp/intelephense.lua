@@ -1,4 +1,6 @@
 return {
+  -- see lua/php_root.lua: keeps vendor/ buffers on the project root
+  root_dir = require('php_root').resolver('intelephense'),
   on_attach = function(client, bufnr)
     client.server_capabilities.workspaceSymbolProvider = false
     client.server_capabilities.completionProvider = false
@@ -10,6 +12,11 @@ return {
   end,
   settings = {
     intelephense = {
+      -- diagnosticProvider=false only blocks pull diagnostics; intelephense
+      -- pushes via publishDiagnostics, so it must be disabled server-side
+      diagnostics = {
+        enable = false
+      },
       environment = {
         phpVersion = "8.1"
       },

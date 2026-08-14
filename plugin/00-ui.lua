@@ -29,6 +29,15 @@ require("rose-pine").setup({
   },
 })
 
+require("jellybeans").setup({
+  -- flat_ui paints FloatBorder with fg == bg, so borders render as a solid slab
+  -- instead of line-drawing characters. Off = real single-line borders.
+  flat_ui = false,
+  -- plugins.auto only detects plugins through lazy.nvim, which we don't use, so
+  -- BlinkCmp*/Snacks*/etc. would silently never be defined.
+  plugins = { all = true },
+})
+
 vim.g.edge_enable_italic = true
 vim.g.everforest_enable_italic = true
 
@@ -36,9 +45,6 @@ vim.g.everforest_enable_italic = true
 vim.api.nvim_create_autocmd("ColorScheme", {
   callback = function()
     vim.api.nvim_set_hl(0, "Cursor", { bg = "#ff007b" })
-    vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })
-    vim.api.nvim_set_hl(0, "FloatBorder", { link = "Normal" })
-    vim.api.nvim_set_hl(0, "Pmenu", { link = "Normal" })
   end,
 })
 
@@ -79,5 +85,9 @@ require("todo-comments").setup({
 })
 
 -- Mini
-require("mini.ai").setup({ n_lines = 500 })
+require("mini.ai").setup({
+  n_lines = 500,
+  -- don't shadow nvim 0.12's built-in an/in incremental selection mappings
+  mappings = { around_next = '', inside_next = '' },
+})
 require("mini.splitjoin").setup({})

@@ -10,13 +10,20 @@ vim.pack.add({
 
 require("snacks").setup({
   bigfile = { enabled = true },
-  indent = { enabled = true },
+  indent = {
+    enabled = true,
+    animate = {
+      enabled = false
+    }
+  },
   notifier = { enabled = true },
   words = { enabled = true },
   picker = {
     enabled = true,
     previewers = { git = { native = true } },
-    formatters = { file = { filename_first = true } },
+    -- min_width: path budget is max(list width, min_width); anything below
+    -- makes truncpath middle-ellipsize into the basename on long filenames
+    formatters = { file = { filename_first = true, min_width = 120 } },
     matcher = {
       frecency = true,
       smartcase = false,
