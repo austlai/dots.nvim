@@ -41,15 +41,7 @@ require("jellybeans").setup({
 vim.g.edge_enable_italic = true
 vim.g.everforest_enable_italic = true
 
--- Reapply custom highlights whenever the colorscheme changes
-vim.api.nvim_create_autocmd("ColorScheme", {
-  callback = function()
-    vim.api.nvim_set_hl(0, "Cursor", { bg = "#ff007b" })
-  end,
-})
-
 vim.cmd.colorscheme("jellybeans")
-vim.opt.guicursor = "n-c-v:block,i:-ver10,a:Cursor/lCursor"
 
 -- Lualine
 require("lualine").setup({

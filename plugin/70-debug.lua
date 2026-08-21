@@ -16,16 +16,6 @@ vim.schedule(
 
     dap.configurations.php = {
       {
-        name = "Neovim Remote XDebug",
-        type = "php",
-        request = "launch",
-        port = 9003,
-        pathMappings = {
-          ["/mnt/gaf"] = os.getenv("HOME") .. "/freelancer-dev/fl-gaf",
-        },
-        log = true,
-      },
-      {
         name = "Neovim Local XDebug",
         type = "php",
         request = "launch",

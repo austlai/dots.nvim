@@ -30,15 +30,6 @@ end, { desc = "Format buffer" })
 -- Lint
 local lint = require("lint")
 
--- local phpcs = lint.linters.phpcs
--- phpcs.cmd = "./vendor/bin/phpcs"
--- phpcs.args = {
---   "-q",
---   "--report=json",
---   "--standard=/home/alai/freelancer-dev/fl-gaf/phpcs_gaf.xml",
---   "-",
--- }
-
 -- phpstan is proxied by phpantom (editor mode, on save) — see .phpantom.toml
 lint.linters_by_ft = {
   php = {

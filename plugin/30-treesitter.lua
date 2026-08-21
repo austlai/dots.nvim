@@ -63,7 +63,9 @@ vim.pack.add({
 })
 
 -- Treesitter Context
-require("treesitter-context").setup()
+require("treesitter-context").setup({
+  multiline_threshold = 10
+})
 
 -- Treewalker
 require("treewalker").setup({

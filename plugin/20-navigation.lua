@@ -17,7 +17,6 @@ require("snacks").setup({
     }
   },
   notifier = { enabled = true },
-  words = { enabled = true },
   picker = {
     enabled = true,
     previewers = { git = { native = true } },
@@ -54,7 +53,21 @@ require("snacks").setup({
   },
 })
 
-vim.keymap.set("n", "<C-g>", function() Snacks.picker.grep() end, { desc = "Grep" })
+-- Where to search from. The cwd wins whenever the buffer is inside it, so
+-- starting in a monorepo subdirectory keeps the search scoped there instead of
+-- widening to the whole repo. Once the buffer is outside the cwd -- a file in
+-- another checkout -- the cwd is meaningless, so fall back to its git root.
+-- relpath is nil for a sibling like fl-gaf-other, which a prefix test would miss.
+local function search_root()
+  local buf = vim.api.nvim_buf_get_name(0)
+  local cwd = vim.uv.cwd()
+  if buf ~= "" and cwd and vim.fs.relpath(cwd, buf) then
+    return cwd
+  end
+  return Snacks.git.get_root() or cwd
+end
+
+vim.keymap.set("n", "<C-g>", function() Snacks.picker.grep({ cwd = search_root() }) end, { desc = "Grep (root)" })
 vim.keymap.set("n", "<C-b>", function() Snacks.picker.buffers({ hidden = true }) end, { desc = "Buffers" })
 vim.keymap.set("n", "<C-f>", function() Snacks.picker.files({ hidden = true }) end, { desc = "Files" })
 vim.keymap.set("n", "<leader>g", function() Snacks.picker.git_status() end, { desc = "Git Status" })
@@ -128,20 +141,6 @@ vim.keymap.set("n", "gi", function() Snacks.picker.lsp_implementations() end, { 
 vim.keymap.set("n", "<leader>ls", function() Snacks.picker.lsp_symbols() end, { desc = "LSP Symbols" })
 vim.keymap.set("n", "<leader>z", function() Snacks.picker.zoxide() end, { desc = "Zoxide" })
 vim.keymap.set("n", "<leader>t", function() Snacks.picker.todo_comments({ keywords = { "ALAI" } }) end, { desc = "ALAI Comments" })
-vim.keymap.set("n", "<leader>r", function()
-  Snacks.picker.recent({
-    filter = {
-      paths = {
-        [vim.fn.stdpath("data")] = false,
-        [vim.fn.stdpath("cache")] = false,
-        [vim.fn.stdpath("state")] = false,
-        [vim.fn.stdpath("config")] = false,
-        ["/home/alai/freelancer-dev"] = true,
-      },
-    },
-  })
-end, { desc = "Recent" })
-
 local function nvimtree_on_attach(bufnr)
   local api = require("nvim-tree.api")
   api.map.on_attach.default(bufnr)

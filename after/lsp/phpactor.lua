@@ -43,5 +43,15 @@ return {
     ["language_server.diagnostic_outsource"] = false,
     ["language_server.diagnostic_ignore_codes"] = { "worse.docblock_missing_param", "worse.unresolved_name" },
     ["language_server.diagnostics_on_update"] = false,
+    -- Setting this key REPLACES phpactor's defaults, so the first three entries
+    -- restore them. The last one keeps nested vendor trees (fl-gaf's
+    -- support/rector/vendor ships a stubs-rector PHPUnit\Framework\TestCase
+    -- with only createMock) from shadowing the real classes in the index.
+    ["indexer.exclude_patterns"] = {
+      "/vendor/**/Tests/**/*",
+      "/vendor/**/tests/**/*",
+      "/vendor/composer/**/*",
+      "/support/rector/vendor/**/*",
+    },
   }
 }

@@ -2,11 +2,11 @@
 --
 -- Every composer package under vendor/ ships its own composer.json, so the
 -- default root_markers walk stops at the first vendor package whenever you jump
--- into third-party code: `gd` into fl-gaf/vendor/awright/gaf-thrift/src/... and
--- the server roots at gaf-thrift instead of at fl-gaf. It then indexes that one
--- package in isolation, so completion and references in vendor buffers see
--- almost nothing -- and it is why phpactor's psalm provider crashed there,
--- since %project_root%/vendor/bin/psalm does not exist inside a vendor package.
+-- into third-party code: `gd` into project/vendor/acme/lib/src/... roots the
+-- server at the lib instead of at the project. It then indexes that one package
+-- in isolation, so completion and references in vendor buffers see almost
+-- nothing -- and it is why phpactor's psalm provider crashed there, since
+-- %project_root%/vendor/bin/psalm does not exist inside a vendor package.
 --
 -- Resolve from above the outermost vendor/ segment instead, so a vendor buffer
 -- lands on the same root as the project that pulled it in.
