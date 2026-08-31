@@ -1,14 +1,6 @@
 vim.pack.add({
-  'https://github.com/rebelot/kanagawa.nvim',
-  'https://github.com/vague-theme/vague.nvim',
-  { src = 'https://github.com/rose-pine/neovim', name = 'rose-pine' },
   'https://github.com/wtfox/jellybeans.nvim',
   { src = 'https://github.com/projekt0n/github-nvim-theme', name = 'github-theme' },
-  'https://github.com/ramojus/mellifluous.nvim',
-  'https://github.com/sainnhe/edge',
-  'https://github.com/miikanissi/modus-themes.nvim',
-  'https://github.com/EdenEast/nightfox.nvim',
-  'https://github.com/sainnhe/everforest',
 })
 
 vim.pack.add({
@@ -20,15 +12,6 @@ vim.pack.add({
   'https://github.com/echasnovski/mini.splitjoin',
 })
 
--- Colorschemes
-require("rose-pine").setup({
-  dim_inactive_windows = true,
-  highlight_groups = {
-    CurSearch = { fg = "base", bg = "leaf", inherit = false },
-    Search = { fg = "text", bg = "leaf", blend = 20, inherit = false },
-  },
-})
-
 require("jellybeans").setup({
   -- flat_ui paints FloatBorder with fg == bg, so borders render as a solid slab
   -- instead of line-drawing characters. Off = real single-line borders.
@@ -37,9 +20,6 @@ require("jellybeans").setup({
   -- BlinkCmp*/Snacks*/etc. would silently never be defined.
   plugins = { all = true },
 })
-
-vim.g.edge_enable_italic = true
-vim.g.everforest_enable_italic = true
 
 vim.cmd.colorscheme("jellybeans")
 
