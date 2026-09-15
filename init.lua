@@ -7,6 +7,9 @@ if vim.fn.isdirectory(overlay) == 1 then
   vim.opt.runtimepath:append(overlay)
 end
 
+-- Per-directory config (.nvim.lua in cwd or a parent, once :trust-ed).
+vim.o.exrc = true
+
 require("options")
 require("mappings")
 require("commands")

@@ -25,6 +25,16 @@ return {
   end,
   single_file_support = false,
   settings = {
+    typescript = {
+      tsserver = {
+        -- fl-gaf/webapp/tsconfig.json has no files/include, so tsserver loads
+        -- all ~19k .ts files under webapp/ and SIGABRTs at the default 3072MB
+        -- heap. root_dir cannot change which tsconfig tsserver picks (it walks
+        -- up from the file), so the only fix on this side is more heap. The
+        -- repo's own lint/test scripts use 10-14GB for the same tree.
+        maxTsServerMemory = 12288,
+      },
+    },
     vtsls = {
       autoUseWorkspaceTsdk = true,
       experimental = {

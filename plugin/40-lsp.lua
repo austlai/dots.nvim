@@ -86,8 +86,9 @@ vim.lsp.enable({
   'yamlls',
 })
 
--- Blink.cmp + LuaSnip (deferred to InsertEnter for startup speed)
-vim.api.nvim_create_autocmd('InsertEnter', {
+-- Blink.cmp + LuaSnip (deferred for startup speed; CmdlineEnter too, or the
+-- command line has no completion until the first insert)
+vim.api.nvim_create_autocmd({ 'InsertEnter', 'CmdlineEnter' }, {
   once = true,
   callback = function()
     local luasnip = require("luasnip")
@@ -122,6 +123,9 @@ vim.api.nvim_create_autocmd('InsertEnter', {
       },
       signature = { enabled = true },
       snippets = { preset = 'luasnip' },
+      -- Command-line menu pops up as you type; the default only does that in
+      -- the command-line window (q:).
+      cmdline = { completion = { menu = { auto_show = true } } },
       sources = {
         providers = {
           lsp = {
